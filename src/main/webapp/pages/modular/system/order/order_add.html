@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css" />
+		<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+		<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css" media="all" />
+	</head>
+
+	<body>
+		<div class="layui-body-header" style="margin-bottom: 200px;">
+			<span class="layui-body-header-title">新增订单</span>
+		</div>
+		<div style="margin-top: 10px;">
+		<form class="layui-form" action="" id="order">
+			<fieldset class="layui-elem-field">
+				<legend>订单信息</legend>
+				<div id="orderInfo">
+					<div class="layui-field-box">
+						<div class="layui-inline">
+							<label class="layui-form-label">订单号</label>
+							<div class="layui-input-inline">
+								<!--<input type="text" name="orderNo" required lay-verify="required" placeholder="请输入订单号" autocomplete="off" class="layui-input">-->
+								<input type="text" autocomplete="off" name="orderNo" class="layui-input" disabled>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">航程类型</label>
+							<div class="layui-input-block">
+								<select lay-filter="trip" name="tripType" lay-verify="required">
+									<option value=""></option>
+									<option value="0" selected="selected">单程</option>
+									<option value="1">往返</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">总价</label>
+							<div class="layui-input-inline">
+								<input type="text" name="totalPrice" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">订单状态</label>
+							<div class="layui-input-block">
+								<select name="status" lay-verify="required">
+									<option value=""></option>
+									<option value="1">待出票</option>
+									<option value="2">出票中</option>
+									<option value="3" selected="selected">已出票</option>
+									<option value="4">已取消</option>
+									<!--<option value="5">退款待确认</option>
+									<option value="6">待退款</option>
+									<option value="7">退款完成</option>-->
+								</select>
+							</div>
+						</div>
+						<br />
+						<br />
+						<div class="layui-inline">
+							<label class="layui-form-label">出发城市</label>
+							<div class="layui-input-inline">
+								<input type="text" name="depCityCode" required lay-verify="required" autocomplete="off" class="layui-input" placeholder="出发城市三字码">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">到达城市</label>
+							<div class="layui-input-inline">
+								<input type="text" name="arrCityCode" required lay-verify="required" autocomplete="off" class="layui-input" placeholder="到达城市三字码">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">出发日期</label>
+							<div class="layui-input-inline">
+								<input type="text" id="flightDepDate" name="flightDepDate" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">到达日期</label>
+							<div class="layui-input-inline">
+								<input type="text" id="flightArrDate" name="flightArrDate" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<br />
+						<br />
+						<div class="layui-inline">
+							<label class="layui-form-label">舱位</label>
+							<div class="layui-input-inline">
+								<input type="text" name="cabin" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">联系人</label>
+							<div class="layui-input-inline">
+								<input type="text" name="relationName" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">航班号</label>
+							<div class="layui-input-inline">
+								<input type="text" name="flightNo" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<br />
+						<br />
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="layui-elem-field">
+				<legend>乘客信息</legend>
+				<button type="button" id="addPassenger" class="layui-btn layui-btn-primary" style="margin-left: 110px;margin-bottom: 10px;">添加乘客</button>
+				<div id="passengerInfo">
+					<div class='newPassenger'>
+						<div class="layui-inline">
+							<label class="layui-form-label">姓名</label>
+							<div class="layui-input-inline">
+								<input type="text" name="name" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">乘客类型</label>
+							<div class="layui-input-block">
+								<select name="passengerType" lay-verify="required">
+									<option value=""></option>
+									<option value="0" selected="selected">成人</option>
+									<option value="1">儿童</option>
+									<option value="2">婴儿</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">证件号</label>
+							<div class="layui-input-inline">
+								<input type="text" name="certNo" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">证件类型</label>
+							<div class="layui-input-block">
+								<select name="certType" lay-verify="required">
+									<option value=""></option>
+									<option value="0" selected="selected">身份证</option>
+									<option value="1">护照</option>
+									<option value="2">学生证</option>
+									<option value="3">军人证</option>
+									<option value="4">回乡证</option>
+									<option value="5">台胞证</option>
+									<option value="6">港澳台胞</option>
+									<option value="7">国际海员</option>
+									<option value="8">外国人永久居留证</option>
+									<option value="9">其他证件</option>
+								</select>
+							</div>
+						</div>
+						<br />
+						<br />
+						<div class="layui-inline">
+							<label class="layui-form-label">票号</label>
+							<div class="layui-input-inline">
+								<input type="text" name="ticketNo" required lay-verify="required" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<!--<button class="layui-btn" lay-submit lay-filter="orderForm">立即提交</button>-->
+					<button class="layui-btn" id="orderForm" lay-submit lay-filter="orderForm">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+
+		</div>
+	</body>
+	<script>
+		var Feng = {
+	        ctxPath: "",
+	        addCtx: function (ctx) {
+	            if (this.ctxPath === "") {
+	                this.ctxPath = ctx;
+	            }
+	        }
+	   	 };
+	   	 Feng.addCtx("${ctxPath}");
+	</script>
+	<script src="${ctxPath}/assets/modular/system/order/order_add.js"></script>
+</html>

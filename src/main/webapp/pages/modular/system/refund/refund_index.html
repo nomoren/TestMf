@@ -1,0 +1,143 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/refund/refund.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="layui-body-header">
+    <span class="layui-body-header-title">退票单管理</span>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                        	<div class="layui-inline">
+								<label class="layui-form-label">类型</label>
+								<div class="layui-inline">
+									<input type="radio" name="theType" value="0" title="全部" checked="checked" lay-filter="theType">
+									<input type="radio" name="theType" value="NoPNR" title="待人工处理" lay-filter="theType">
+									<input type="radio" name="theType" value="NoPNRSYS" title="已取位待系统处理" lay-filter="theType" id="whatIsNoPNRSYS">
+									<input type="radio" name="theType" value="commitFail" title="系统提交失败" lay-filter="theType">
+									<input type="radio" name="theType" value="isChecking" title="已提交待审核" lay-filter="theType">
+									<input type="radio" name="theType" value="checkFail" title="审核不通过" lay-filter="theType">
+									<input type="radio" name="theType" value="complete" title="已完成" lay-filter="theType">
+								</div>
+								
+							</div>
+							<br />
+						
+                        	<div class="layui-inline">
+								<label class="layui-form-label">退票单号</label>
+								<div class="layui-input-block">
+									<input type="text" id="retNo" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">订单号</label>
+								<div class="layui-input-block">
+									<input type="text" id="orderNo" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">航班号</label>
+								<div class="layui-input-block">
+									<input type="text" id="flight" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">申请日期(乘)</label>
+								<div class="layui-input-inline">
+									<input type="text" id="cAppStartDate" placeholder="开始日期"  class="layui-input">
+								</div>
+								<div class="layui-form-mid">-</div>
+								<div class="layui-input-inline">
+									<input type="text" id="cAppEndDate" placeholder="结束日期"  class="layui-input">
+								</div>
+							</div>
+							<br />
+							<div class="layui-inline">
+								<label class="layui-form-label">订单来源</label>
+								<div class="layui-input-block">
+									<select name="orderSource" lay-verify="required" id="orderSource">
+										<option value="0-0">全部</option>
+										<option value='06-2'>途牛(上上旅行)</option>
+										<option value='02-2'>去哪儿主店</option>
+										<option value='02-1'>去哪儿分销</option>
+										<option value='1-1'>携程一店</option>
+										<option value='1-2'>携程二店</option>
+										<option value='1-3'>携程三店</option>
+										<option value='04-0'>淘宝</option>
+										<option value='05-0'>同程</option>
+										<option value='07-0'>就旅行</option>
+										<option value='99-0'>智行</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">乘客名</label>
+								<div class="layui-input-block">
+									<input type="text" id="name" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">票号</label>
+								<div class="layui-input-block">
+									<input type="text" id="ticketNo" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">航班日期</label>
+								<div class="layui-input-inline">
+									<input type="text" id="flightStartDate" placeholder="开始日期"  class="layui-input">
+								</div>
+								<div class="layui-form-mid">-</div>
+								<div class="layui-input-inline">
+									<input type="text" id="flightEndDate" placeholder="结束日期"  class="layui-input">
+								</div>
+							</div>
+							<br />
+							<div class="layui-inline">
+								<label class="layui-form-label">退票状态(乘)</label>
+								<div class="layui-input-block">
+									<select name="cRemState" lay-verify="required" id="cRemState">
+										<option value='-2'>全部</option>
+										<option value='-1'>未退票</option>
+										<option value='0'>申请中</option>
+										<option value='1'>已退款</option>
+										<option value='2'>已拒绝</option>
+										<option value='3'>等航变</option>
+										<option value='8'>审核失败</option>
+										<option value='4'>取消作废</option>
+										<option value='11'>未向平台确认</option>
+									</select>
+								</div>
+							</div>
+							
+                            <div class="layui-inline" style="margin-left: 110px;">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="add" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe608;</i>添加</button>
+                               	<button id="delete" class="layui-btn layui-btn-danger icon-btn"><i class="layui-icon">&#xe640;</i>删除</button>
+                            </div>
+                            <div class="layui-inline" style="margin-left: 57px;">
+								<input type="checkbox" title="只看我" id="onlyMe" name="onlyMe"  />
+							</div>
+							<div class="layui-inline" style="margin-left: 190px;">
+								<button id="btnExport" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出当前</button>
+							</div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="refundTable" lay-filter="refundTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tableBar">
+	<button type="button" class="layui-btn layui-btn-sm"  lay-event="show">查看</button>
+  {{# if(d.processBy==''){ }}
+    <button type="button" class="layui-btn layui-btn-sm"  lay-event="edit">编辑</button>
+ {{#  } }}
+  	{{# if(d.processBy!=''){ }}
+  	<button type="button" class="layui-btn layui-btn-sm"  lay-event="unlock">解锁</button>
+  	{{#  } }}
+</script>
+@}

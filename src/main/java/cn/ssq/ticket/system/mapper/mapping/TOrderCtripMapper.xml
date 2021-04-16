@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 订单_携程中间表(t_order_ctrip) -->
+<mapper namespace="cn.ssq.ticket.system.mapper.TOrderCtripMapper">
+    <!-- 字段映射 -->
+    <resultMap id="tOrderCtripMap" type="cn.ssq.ticket.system.entity.TOrderCtrip">
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="ctrip_id" property="ctripId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 表查询字段 -->
+    <sql id="allColumns">
+        id, order_id, ctrip_id
+    </sql>
+
+</mapper>

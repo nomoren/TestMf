@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="ok">
+    <order id="1609750840077" orderNo="rnf210104170015048001" allPrice="1256" noPay="0.0" childPrintPrice="600"
+           childFaceValue="600" source="mobile.app.android" policySource="DDZH350CXBM6" ticketMode="手工出票"
+           policyFriendly="XLY210104092341SI5W00" insuranceUnitPrice=""
+           backnote="退票手续费收取规则：航班起飞前168小时之前，退票手续费为240元；航班起飞前72小时之前，退票手续费为300元；航班起飞前4小时之前，退票手续费为360元；航班起飞前4小时之后，退票手续费为480元同航司改期手续费收取规则：航班起飞前168小时之前，改期手续费为120元；航班起飞前72小时之前，改期手续费为180元；航班起飞前4小时之前，改期手续费为240元；航班起飞前4小时之后，改期手续费为360元签转条件：不可签转"
+           cabinnote="政策出票" xcdPrice="0" xcd="-" viewPrice="600" price="578.0" pnr="" pnrBigCodeAdult=""
+           pnrBigCodeChild="" tic_type="D" URL="1" fee="" XCDN="否" splitFlagShip="8" cpnr="" pnrText="" childPnrText=""
+           pataText="" childPataText="" constructionFee="50" fuelTax="0" childFuelTax="0" policyType="预付产品"
+           status="PAY_OK" contact="" contactMob="" contactEmail="" createTime="2021-01-04 17:00:40.0" needPS="false"
+           lastUpdateTime="2021-01-04 17:00:40.0" qavUp="0" refundXcdDiff="false" deadline="2021-01-07 10:20:00"
+           backCashTotalPrice="0.0" totalCutPrice="0" price_type="特惠" voucherCount="0" voucherPrice="0" splitSign="0"
+           rootOrderNo="rnf210104170015048001">
+        <flight code="ZH9541" cabin="L" ccabin="L" dep="WUX" arr="CTU" depDay="2021-01-08" depTime="10:20"
+                arrTime="13:25" realCode=""/>
+        <passenger name="凌学政" birthday="1967-11-22" ageType="0" gender="男" cardType="NI" price="578.0" priceType="成人"
+                   mobile="15852518803" cardNum="110108196711222275" eticketNum=""></passenger>
+        <passenger name="薛海雁" birthday="1973-06-02" ageType="0" gender="男" cardType="NI" price="578.0" priceType="成人"
+                   mobile="18610090391" cardNum="32021119730602343X" eticketNum=""></passenger>
+        <log operator="SYSTEM" time="2021-01-04 17:00:45.0" action="触发消息通知，变化码为：0101，调用结果：成功"/>
+        <log operator="System" time="2021-01-04 17:00:41.0" action="派单成功"/>
+        <usertag ticketOkDataTag="行程单用户"/>
+    </order>
+</result>

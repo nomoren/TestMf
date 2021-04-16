@@ -1,0 +1,502 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/change/change_edit.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="x-body" style="background-color: white;">
+	<div class="layui-collapse" style="margin-top: 5px;">
+		<!-- 订单信息 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">订单信息</h2>
+			<input type="hidden" id="orderNo" value="${data.orderNo!}" />
+			<input type="hidden" id="newCOrderNo" value="${newCOrderNo!}" />
+			<div class="layui-colla-content layui-show">
+				<div style="width: 100%">
+					<div style="border-right: 1px solid #C0C0C0;float: left;width: 70%">
+						<table class="layui-table" lay-size="sm" lay-skin="nob">
+							<colgroup>
+								<col width="10%">
+								<col width="40%">
+								<col width="10%">
+								<col width="40%">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td><b>出票单号：</b></td>
+									<td id="orderNoText"><b>${data.orderNo!}</b></td>
+									<td><b>订单来源：</b></td>
+									<td id="orderSourceText"><b>${data.orderSource!}</b></td>
+								</tr>
+								<tr>
+									<td><b>成人PNR：</b></td>
+									<td id="pnrText"><b>${data.pnr!}</b></td>
+									<td><b>政策代码：</b></td>
+									<td id="policyIdText"><b>${data.policyType!}</b></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="border: 0px solid red;float: left;width: 20%;">
+						<div style="border: 0px solid red;text-align: center;padding-top: 35px;padding-left: 40px;">
+							<h1 style="font-weight: bold;font-size: 24px;color: #f60;" id="orderStatusText">${data.status!}</h1>
+						</div>
+					</div>
+				</div>
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="15%">
+						<col width="15%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>航程类型</th>
+							<th>报价类型</th>
+							<th>产品类型</th>
+							<th>航班号</th>
+							<th>舱位</th>
+							<th>起降机场</th>
+							<th>起降时间</th>
+							<th>航班信息</th>
+						</tr>
+					</thead>
+					<tbody id="flightInfo">
+						@for(flight in data.flightList){
+						<tr>
+							@if(flightLP.index==1){
+								<td rowspan="2">${data.tripType!}</td>
+							@}
+							<td>特惠</td>
+							<td>预付产品</td>
+							<td>${flight.flightNo!}</td>
+							<td>${flight.cabin!}</td>
+							<td>${flight.depCityCode!} - ${flight.arrCityCode!}</td>
+							<td>${flight.depTimes!} - ${flight.arrTimes!}</td>
+							<td>
+								<a href="javacript:void(0);" style="color: blue;" id="orderxq">详情</a>
+							</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+				<!--<form class="layui-form" action="" id="passengerList">-->
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>旅客类型</th>
+							<th>人数</th>
+							<th>票面</th>
+							<th>机建/燃油</th>
+							<th>航意险/份</th>
+							<th>延误险/份</th>
+							<th>机票</th>
+							<th>快递</th>
+							<th>行程单已退差额</th>
+							<th>CPC上调</th>
+							<th style='font-weight: bold;'>用户支付总价</th>
+						</tr>
+					</thead>
+					<tbody id="orderInfo">
+						@var adult=0;   var adultTax=0;   var adultTicketPrice=0; var adultActualPrice=0;
+						@var childen=0; var childenTax=0; var childenTicketPrice=0; var childenActualPrice=0;
+						@var baby=0;    var babyTax=0;    var babyTicketPrice=0; var babyActualPrice=0;
+						@for(passenger in data.passengetList){ 
+							@if(passenger.passengerType=='成人'){
+								@adult++;
+								@if(adultTax==0){
+									@adultTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@adultTicketPrice=passenger.ticketPrice;
+									@adultActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='儿童'){
+								@childen++;
+								@if(childenTax==0){
+									@childenTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@childenTicketPrice=passenger.ticketPrice;
+									@childenActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='婴儿'){
+								@baby++;
+								@if(babyTax==0){
+									@babyTax=passenger.tax+passenger.fee;
+									@babyTicketPrice=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@varbabyActualPrice=passenger.actualPrice;
+								@}
+							@}
+						@}
+						@if(adult!=0){
+							<tr>
+								<td>成人</td>
+								<td>${adult}</td>
+								<td>¥${adultTicketPrice}</td>
+								<td>¥${adultTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${adultActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td rowspan="3">¥${data.totalPrice!}</td>
+							</tr>
+						@}
+						@if(childen!=0){
+							<tr>
+								<td>儿童</td>
+								<td>${childen}</td>
+								<td>¥${childenTicketPrice}</td>
+								<td>¥${childenTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${childenActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								@if(adult==0){
+									<th rowspan="3">¥${data.totalPrice!}</th>
+								@}
+							</tr>
+						@}
+						@if(baby!=0){
+							<tr>
+								<td>婴儿</td>
+								<td>${baby}</td>
+								<td>¥${babyTicketPrice}</td>
+								<td>¥${babyTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${babyActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						@}
+					</tbody>
+				</table>
+
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>类型</th>
+							<th>乘机人姓名</th>
+							<th>证件类型</th>
+							<th>证件号</th>
+							<th>票号</th>
+						</tr>
+					</thead>
+					<tbody id="passengerInfo">
+						@for(passenger in data.passengetList){
+						<tr>
+							<th>${passengerLP.index}</th>
+							<th>${data.passengetList[0].passengerType}</th>
+							<th>${passenger.name!}</th>
+							<th>${passenger.certType!}</th>
+							<th>${passenger.certNo!}</th>
+							<th>${passenger.ticketNo!}</th>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- 共享信息 -->
+		<div class="layui-colla-item" style="display: none;">
+			<h2 class="layui-colla-title">共享信息</h2>
+			<div class="layui-colla-content layui-show">
+
+			</div>
+		</div>
+
+		<!-- 销售规则 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">销售规则</h2>
+			<div class="layui-colla-content layui-show">
+
+			</div>
+		</div>
+
+		<!-- 航班状态 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">航班状态</h2>
+			<div class="layui-colla-content layui-show">
+				<table class="layui-table" lay-size="sm" lay-skin="nob">
+					<colgroup>
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col>
+					</colgroup>
+					<tbody>
+						@for(flight in data.flightList){
+						<tr>
+							<td>航班号：</td>
+							<td>${flight.flightNo!}</td>
+						</tr>
+						<tr>
+							<td>计划起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>预计起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>实际起飞时间：</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>计划到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>预计到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>实际到达时间：</td>
+							<td>无</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--采购信息-->
+		<div class="layui-colla-item"  id="purchInfo">
+		   <h2 class="layui-colla-title">采购信息</h2>
+			<div class="layui-colla-content layui-show">
+				<form class="layui-form" action="" id="purch">
+					<table class="layui-table" lay-size="sm">
+						<colgroup>
+							<col width="10%">
+							<col width="6%">
+							<col width="6%">
+							<col width="6%">
+							<col width="15%">
+							<col width="6%">
+							<col width="6%">
+							<col width="10%">
+							<col width="8%">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>交易流水号</th>
+								<th>出票地</th>
+								<th>采购价格</th>
+								<th>支付方式</th>
+								<th>备注</th>
+								<th>乘客</th>
+								<th>类型</th>
+								<th>新票号</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="purchList">
+						</tbody>
+							<tr id="purchFormInfo">
+								<!--<th>
+									<input type="text" name="purchaseNo" id="purchaseNo" placeholder="输入采购单号"  autocomplete="off" class="layui-input">
+								</th>-->
+								<th>
+									<input type="text" name="tradeNo" id="tradeNo"  placeholder="输入交易流水号"   autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									<select lay-filter="trip" name="supplier" lay-verify="required" id="supplier">
+										<option value="0">请选择出票地</option>
+										<option value="1" >官网</option>
+										<option value="5" selected="selected">客服</option>
+										<option value="18">B2B</option>
+										<option value="17">鹏朋</option>
+										<option value="16">携程反采</option>										
+										<option value="19">反采3600</option>
+										<option value="8">去哪反采</option>
+										<option value="20">同程反采</option>
+										<option value="15">蜗牛反采</option>
+										<option value="13">BSP</option>
+										<option value="9">淘宝反采</option>
+										<option value="2">517NA</option>
+										<option value="3">百拓</option>
+										<option value="4">19E</option>
+										<option value="6">中航易购</option>
+										<option value="7">天地行</option>
+										<option value="10">八千翼</option>
+										<option value="11">票盟</option>
+										<option value="12">51BOOK</option>
+										<option value="14">美团</option>
+										<option value="99">其他</option>
+									</select>
+								</th>
+								<th>
+									<input type="number" name="payAmount" id="purchPayAmount" placeholder="输入采购价格" required lay-verify="required" value="" autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									<select lay-filter="trip" name="payWay" lay-verify="required" id="payWay">
+										<option value="0">请选择支付方式</option>
+										<option value="18">罗137支付宝</option>
+										<option value="13" selected="selected">易宝支付</option>
+										<option value="98">免费改期</option>
+										<option value="11">凤凰卡</option>
+										<option value="28">ssq777支付宝</option>
+										<option value="26">汇付</option>
+										<option value="24">ssqly支付宝</option>
+										<option value="22">632支付宝</option>
+										<option value="19">3600钱包支付</option>
+										<option value="21">BSP</option>
+										<option value="25">南航钱包支付</option>		
+										<option value="23">付时威支付宝</option>									
+										<option value="17">支付宝</option>
+										<option value="20">罗建设银行</option>
+										<option value="99">其他</option>
+									</select>
+								</th>
+								<th>
+									<input type="text" name="remark" placeholder="备注" id="purchRemark" value="" autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									@for(passenger in data.passengetList){
+									   <input type='checkbox' name='passengerNames' title='${passenger.name}' value='${passenger.name}'  checked='checked' required lay-verify='required'><br/>
+									@}
+								</th>
+								<th>
+									<select lay-filter="trip" name="type" lay-verify="required" id="purchType">
+										<option value="2" selected="selected">改签报表</option>
+										<option value="1">差错报表</option>
+										<option value="0">正常报表</option>
+									</select>
+								</th>
+								<th>
+									<input type="text" id="newTicketNo" name="newTicketNo" placeholder="新票号" lay-verify="required" class="layui-input">
+								</th>
+								<th id="save">
+									<input type="hidden"  name="orderNo" value="${data.orderNo!}"/>
+									<input type="hidden"  name="orderId" value="${data.orderId!}"/>
+									<input type="hidden"  name="passengerId" value="${data.passengetList[0].passengerId!}"/>
+									@if(childen!=0||baby!=0){
+									<input type='hidden' name='hasChildren' value='1'/>
+									@}
+									<button class="layui-btn" id="purchForm" lay-submit lay-filter="purchForm">保存</button>
+								</th>
+							</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<!--改签-->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">改签</h2>
+			<div class="layui-colla-content layui-show">
+				<p><b>改签单号 : ${newCOrderNo!}</b></p>
+				<P style="display: none;" id="changeNo">${newCOrderNo!}</P>
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="6">改签信息</th>
+						</tr>
+						<tr>
+							<th>改签乘客</th>
+							<th>改签舱位</th>
+							<th>改签费用(乘)</th>
+							<!--<th>改签费用(供)</th>-->
+							<th>改签状态</th>
+							<th>改签票号</th>
+							<th>改签日期</th>
+						</tr>
+					</thead>
+					<tbody id="changePassengers">
+						@for(change in changeList){
+							<form class='changeP'>
+							 	<tr>
+									<th> ${change.passengerName!} </th>
+									<th><input type='text'  name='cabin'  class='layui-input'  value='${change.cabin!}'/></th>
+									<th><input type='number'  name='revenuePrice' autocomplete='off' class='layui-input' value='${change.revenuePrice!}'/></th>
+									
+									<th>
+										<select lay-filter='trip' name='state' id='state${change.changeId}'>
+											<option value='1'>改签申请中</option>
+											<option value='2'>改签完成</option>
+											<option value='3'>拒绝改签</option>
+										</select>
+									</th>
+									
+									<th><input type='text' name='tktNo' id="tktNo${change.changeId}" class='layui-input' value='${change.tktNo!}'/></th>
+									
+									<th>
+										<input type='text'  name='changeDate'  class='layui-input changeDate'  value='${change.changeDate!}'/>
+										<input type='hidden' name='changeId' value='${change.changeId}' />
+										<input type='hidden' name='passengerName' value='${change.passengerName}' />
+										<input type='hidden' name='orderNo' value='${change.orderNo}' />
+										<input type='hidden' name='orderSource' value='${change.orderSource}' />
+										<input type='hidden' name='newCOrderNo' value='${change.newCOrderNo}' />
+									</th>
+								<tr>
+							</form>
+						@}
+					</tbody>
+				</table>
+				<div style="text-align: center;">
+					<button type="button" class="layui-btn layui-btn-normal" id="saveChanges">保存</button>
+				</div>
+			</div>
+		</div>
+		<!--操作日志-->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title ">操作日志</h2>
+			<div class="layui-colla-content layui-show" lay-filter="log">
+				<table class="layui-table" id="logTable" lay-filter="logTable"></table>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+select::-ms-expand { display: none; }
+	select{  
+    width:160px;  
+    height:34px;  
+    appearance:none;  
+    background-size:10%;
+    font-size:13px;  
+    color:#666;  
+    outline:none;
+   	padding-left: 48px;
+   	border-color: #e6e6e6;
+}  
+</style>
+<script>
+	@for(change in changeList){
+		var id=${change.changeId};
+		var state=${change.state};
+		$("#state"+id+" option[value='"+state+"']").attr("selected","selected");
+	@}
+</script>
+@}

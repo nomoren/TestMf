@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var Feng = {
+				ctxPath: "",
+				addCtx: function(ctx) {
+					if(this.ctxPath === "") {
+						this.ctxPath = ctx;
+					}
+				}
+			};
+			Feng.addCtx("${ctxPath}");
+		</script>
+		<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css" />
+		<link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css" media="all" />
+		<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/common.js"></script>
+	</head>
+
+	<body>
+
+		<!--<form class="layui-form" action="">-->
+			<div class="layui-form-item layui-form-text" >
+				<div class="layui-input-block" style="margin-left: 0px">
+					<textarea name="reason" placeholder="请输入驳回理由" class="layui-textarea" id="reason" style="height: 150px;margin-left: 0px;"></textarea>
+				</div>
+			</div>
+	<!--	</form>-->
+
+	</body>
+
+</html>

@@ -1,0 +1,91 @@
+@/* 框架的主界面 */
+<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+<div class="layui-body">
+	<div class="layui-tab" lay-allowClose="true" lay-filter="admin-pagetabs">
+		<ul class="layui-tab-title" id="layui-tab-title">
+		</ul>
+		<div class="layui-tab-content" id="layui-tab-content">
+		</div>
+	</div>
+	<div class="layui-icon admin-tabs-control layui-icon-prev" ew-event="leftPage"></div>
+	<div class="layui-icon admin-tabs-control layui-icon-next" ew-event="rightPage"></div>
+	<div class="layui-icon admin-tabs-control layui-icon-down">
+		<ul class="layui-nav admin-tabs-select" lay-filter="admin-pagetabs-nav">
+			<li class="layui-nav-item" lay-unselect>
+				<a href="javascript:;"></a>
+				<dl class="layui-nav-child layui-anim-fadein">
+					<dd ew-event="closeThisTabs" lay-unselect>
+						<a href="javascript:;">关闭当前标签页</a>
+					</dd>
+					<dd ew-event="closeOtherTabs" lay-unselect>
+						<a href="javascript:;">关闭其它标签页</a>
+					</dd>
+					<dd ew-event="closeAllTabs" lay-unselect>
+						<a href="javascript:;">关闭全部标签页</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+	var element;
+	$(document).ready(function() {
+		layui.use(['layer', 'element'], function() {
+			element = layui.element;
+			element.on("tabDelete(admin-pagetabs)", function(data) {
+				console.log(this); //当前Tab标题所在的原始DOM元素
+				console.log(data.index); //得到当前Tab的所在下标
+				console.log(data.elem); //得到当前的Tab大容器
+			});
+			element.on('tab(admin-pagetabs)', function(data) {
+				console.log(this); //当前Tab标题所在的原始DOM元素
+				console.log(data.index); //得到当前Tab的所在下标
+				console.log(data.elem); //得到当前的Tab大容器
+			});
+		})
+
+	});
+
+	function loadTab(id, url, name) {
+
+		if(id.length > 11) {
+			var sort = "..." + id.substring(id.length - 6, id.length);
+			name = name + sort;
+		} else {
+			name = name + id;
+		}
+		var flag = getTitleId('admin-pagetabs', id); // 是否有该选项卡存在
+		// 大于0就是有该选项卡了
+		if(flag != -1) {
+			id = flag;
+		} else {
+			element
+				.tabAdd(
+					"admin-pagetabs", {
+						title: "<span>" +
+							name +
+							"</span>" //用于演示
+							,
+						content: "<iframe src='" + Feng.ctxPath + url + "' frameborder='0' class='admin-iframe'  style='height: 100%;'></iframe>",
+						id: id
+						//实际使用一般是规定好的id，这里以时间戳模拟下
+					})
+		}
+		// 切换相应的ID tab
+		element.tabChange("admin-pagetabs", id);
+	}
+
+	//根据导航栏text获取lay-id
+	function getTitleId(card, idname) {
+		var id = -1;
+		$(document).find(".layui-tab[lay-filter=" + card + "] ul li").each(
+			function() {
+				if(idname === $(this).attr("lay-id")) {
+					id = $(this).attr('lay-id');
+				}
+			});
+		return id;
+	}
+</script>

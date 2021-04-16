@@ -1,0 +1,507 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/refund/refund_edit.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="x-body" style="background-color: white;">
+	<div class="layui-collapse" style="margin-top: 5px;">
+		<!-- 订单信息 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">订单信息</h2>
+			<input type="hidden" id="orderNo" value="${data.orderNo!}" />
+			<input type="hidden" id="refundId" value="${refundId}" />
+			<input type="hidden" id="retNo" value="${retNo}" />
+			<div class="layui-colla-content layui-show">
+				<div style="width: 100%">
+					<div style="border-right: 1px solid #C0C0C0;float: left;width: 70%">
+						<table class="layui-table" lay-size="sm" lay-skin="nob">
+							<colgroup>
+								<col width="10%">
+								<col width="40%">
+								<col width="10%">
+								<col width="40%">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td><b>出票单号：</b></td>
+									<td id="orderNoText"><b>${data.orderNo!}</b></td>
+									<td><b>订单来源：</b></td>
+									<td id="orderSourceText"><b>${data.orderSource!}</b></td>
+								</tr>
+								<tr>
+									<td><b>成人PNR：</b></td>
+									<td id="pnrText"><b>${data.pnr!}</b></td>
+									<td><b>政策代码：</b></td>
+									<td id="policyIdText"><b>${data.policyType!}</b></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="border: 0px solid red;float: left;width: 20%;">
+						<div style="border: 0px solid red;text-align: center;padding-top: 35px;padding-left: 40px;">
+							<h1 style="font-weight: bold;font-size: 24px;color: #f60;" id="orderStatusText">${data.status!}</h1>
+						</div>
+					</div>
+				</div>
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="15%">
+						<col width="15%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>航程类型</th>
+							<th>报价类型</th>
+							<th>产品类型</th>
+							<th>航班号</th>
+							<th>舱位</th>
+							<th>起降机场</th>
+							<th>起降时间</th>
+							<th>航班信息</th>
+						</tr>
+					</thead>
+					<tbody id="flightInfo">
+						@for(flight in data.flightList){
+						<tr>
+							<td rowspan="2">${data.tripType!}</td>
+							<td>特惠</td>
+							<td>预付产品</td>
+							<td>${flight.flightNo!}</td>
+							<td>${flight.cabin!}</td>
+							<td>${flight.depCityCode!} - ${flight.arrCityCode!}</td>
+							<td>${flight.depTimes!} - ${flight.arrTimes!}</td>
+							<td>
+								<a href="javacript:void(0);" style="color: blue;" id="orderxq">详情</a>
+							</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+				<!--<form class="layui-form" action="" id="passengerList">-->
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>旅客类型</th>
+							<th>人数</th>
+							<th>票面</th>
+							<th>机建/燃油</th>
+							<th>航意险/份</th>
+							<th>延误险/份</th>
+							<th>机票</th>
+							<th>快递</th>
+							<th>行程单已退差额</th>
+							<th>CPC上调</th>
+							<th style='font-weight: bold;'>用户支付总价</th>
+						</tr>
+					</thead>
+					<tbody id="orderInfo">
+						@var adult=0;   var adultTax=0;   var adultTicketPrice=0; var adultActualPrice=0;
+						@var childen=0; var childenTax=0; var childenTicketPrice=0; var childenActualPrice=0;
+						@var baby=0;    var babyTax=0;    var babyTicketPrice=0; var babyActualPrice=0;
+						@for(passenger in data.passengetList){ 
+							@if(passenger.passengerType=='成人'){
+								@adult++;
+								@if(adultTax==0){
+									@adultTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@adultTicketPrice=passenger.ticketPrice;
+									@adultActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='儿童'){
+								@childen++;
+								@if(childenTax==0){
+									@childenTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@childenTicketPrice=passenger.ticketPrice;
+									@childenActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='婴儿'){
+								@baby++;
+								@if(babyTax==0){
+									@babyTax=passenger.tax+passenger.fee;
+									@babyTicketPrice=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@varbabyActualPrice=passenger.actualPrice;
+								@}
+							@}
+						@}
+						@if(adult!=0){
+							<tr>
+								<td>成人</td>
+								<td>${adult}</td>
+								<td>¥${adultTicketPrice}</td>
+								<td>¥${adultTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${adultActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td rowspan="3">¥${data.totalPrice!}</td>
+							</tr>
+						@}
+						@if(childen!=0){
+							<tr>
+								<td>儿童</td>
+								<td>${childen}</td>
+								<td>¥${childenTicketPrice}</td>
+								<td>¥${childenTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${childenActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								@if(adult==0){
+									<th rowspan="3">¥${data.totalPrice!}</th>
+								@}
+							</tr>
+						@}
+						@if(baby!=0){
+							<tr>
+								<td>婴儿</td>
+								<td>${baby}</td>
+								<td>¥${babyTicketPrice}</td>
+								<td>¥${babyTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${babyActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						@}
+					</tbody>
+				</table>
+
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>类型</th>
+							<th>乘机人姓名</th>
+							<th>证件类型</th>
+							<th>证件号</th>
+							<th>票号</th>
+						</tr>
+					</thead>
+					<tbody id="passengerInfo">
+						@for(passenger in data.passengetList){
+						<tr>
+							<th>${passengerLP.index}</th>
+							<th>${data.passengetList[0].passengerType}</th>
+							<th>${passenger.name!}</th>
+							<th>${passenger.certType!}</th>
+							<th>${passenger.certNo!}</th>
+							<th>${passenger.ticketNo!}</th>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- 共享信息 -->
+		<div class="layui-colla-item" style="display: none;">
+			<h2 class="layui-colla-title">共享信息</h2>
+			<div class="layui-colla-content layui-show">
+
+			</div>
+		</div>
+
+		<!-- 销售规则 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">销售规则</h2>
+			<div class="layui-colla-content" id="sellRole"> 
+
+			</div>
+		</div>
+
+		<!-- 航班状态 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">航班状态</h2>
+			<div class="layui-colla-content layui-show">
+				<table class="layui-table" lay-size="sm" lay-skin="nob">
+					<colgroup>
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col>
+					</colgroup>
+					<tbody>
+						@for(flight in data.flightList){
+						<tr>
+							<td>航班号：</td>
+							<td>${flight.flightNo!}</td>
+						</tr>
+						<tr>
+							<td>计划起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>预计起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>实际起飞时间：</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>计划到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>预计到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>实际到达时间：</td>
+							<td>无</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--采购信息-->
+		<div class="layui-colla-item" style="display: none;" id="purchInfo">
+			<h2 class="layui-colla-title">采购信息</h2>
+			<div class="layui-colla-content layui-show">
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>采购单号</th>
+							<th>出票地</th>
+							<th>采购价格</th>
+							<th>支付方式</th>
+							<th>备注</th>
+							<th>乘客</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="purchList">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--退款-->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">退款</h2>
+			<div class="layui-colla-content layui-show">
+				<form class="layui-form" action="" id="refundInfo">
+				<table class="layui-table" lay-size="sm">
+					<p><b>退票单号 : <span id="retNoText">${retNo!}</span></b></p>
+					<thead>
+						<tr>
+							<th colspan="8">退款信息</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>申请日期(乘)</td>
+							<td>
+								<input type="text"  id="pAppDate"    autocomplete="off" class="layui-input" value="${refund.cAppDate}"/>
+							</td>
+							<td>退款日期(乘)</td>
+							<td>
+								<input type="text"  id="pRemDate"  autocomplete="off" class="layui-input" value="${refund.cRemDate}"/>
+							</td>
+							<td>待退总金额</td>
+							<td>
+								<input type="number"  autocomplete="off" class="layui-input" value="${refund.cRealPrice}" readonly="readonly"/>
+							</td>
+						</tr>
+						<tr>
+							<td>申请日期(供)</td>
+							<td>
+								<input type="text"  id="aAppDate"  autocomplete="off" class="layui-input" value="${refund.airAppDate}"/>
+							</td>
+							<td>退款日期(供)</td>
+							<td>
+								<input type="text"  id="aRemDate"  autocomplete="off" class="layui-input" value="${refund.airRemDate}"/>
+							</td>
+								<td>退款乘客</td>
+							<td>
+								<input type="text"  autocomplete="off"  readonly="readonly" class="layui-input" value="${refund.passengerName}"/>
+								<input type="hidden"  readonly="readonly" id="isRet" value="${refund.isRet}"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<!--	<div style="text-align: center;">
+					<button type="button" class="layui-btn layui-btn-normal" id="saveRefund">保存</button>
+				</div>-->
+				</form>
+				<!--<form class='layui-form'>-->
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="9">退票信息</th>
+						</tr>
+						<tr>
+							<th>退票乘客</th>
+							<th>票号</th>
+							<th>乘客实退</th>
+							<th>供应实退</th>
+							<th>供应预退</th>
+							<th>备注</th>
+							<th>申请类型(供)</th>
+							<th>退票状态(供)</th>
+							<th>PNR状态</th>
+						</tr>
+					</thead>
+					<tbody id="refundPassengers">
+						@for(passenger in refundPassenger){
+						<form class='refundP'>
+						 	<tr>
+							<td>${passenger.passengerName}
+								<input type='hidden' name='passengerName' value='${passenger.passengerName!}' />
+								<input type='hidden' class="cAppDate" name='cAppDate' value='${passenger.cAppDate!}' />
+								<input type='hidden' class="cRemDate" name='cRemDate' value='${passenger.cRemDate!}' />
+								<input type='hidden' class="airAppDate" name='airAppDate' value='${passenger.airAppDate!}' />
+								<input type='hidden' class="airRemDate" name='airRemDate' value='${passenger.airRemDate!}' />
+								<input type='hidden' class="retNo" name='retNo' value='${passenger.retNo!}' />
+								<input type='hidden' name='refundId' value='${passenger.refundId!}' />
+								<input type='hidden' name='orderNo' value='${data.orderNo!}' />
+							</td>
+							<td>${passenger.ticketNo}</td>
+							<td>
+								<input type="number"  id="cRealPrice" name="cRealPrice"  autocomplete="off" class="layui-input" value="${passenger.cRealPrice!}"/>
+							</td>
+							<td>
+								<input type="number"  id="airRealPrice"  name="airRealPrice" autocomplete="off" class="layui-input" value="${passenger.airRealPrice!}"/>
+							</td>
+							<td>
+								<input type="number"  id="airEstimatePrice"  name="airEstimatePrice" autocomplete="off" class="layui-input" value="${passenger.airEstimatePrice!}"/>
+							</td>
+							<td>
+							<input type="text"  id="remark"  name="remark"  autocomplete="off" class="layui-input" value="${passenger.remark}"/>
+							</td>
+							<td id="parent">
+								<select lay-filter='trip' name='airRefundType' id='refundType${passenger.refundId}'>
+									<option value='0'>自愿</option>
+									<option value='1'>非自愿</option>
+									<option value='2'>未知</option>
+									<option value='3'>航班变动</option>
+									<option value='4'>病退</option>
+									<option value='5'>前段影响后段</option>
+									<option value='6'>特殊事件</option>
+								</select>
+							</td>
+							<td>
+								<select lay-filter='trip' name='airRemState' id='isAirRet${passenger.refundId}' class="airRemStateC">
+									<option value='-1'>未退票</option>
+									<option value='0'>申请中</option>
+									<option value='1'>已退款</option>
+									<option value='2'>已拒绝</option>
+									<option value='3'>等航变</option>
+									<option value='4'>取消作废</option>
+									<option value='8'>申请失败</option>
+									<option value='7'>审核中</option>
+									<option value='6'>审核失败</option>
+								</select>
+							</td>
+							<td>
+								 未取消:<input type="radio" name="xePnrStatus" value="0" title="未取消" class="xePnrStatus${passenger.refundId}" lay-filter="xePnrStatus"/>
+      							 已取消:<input type="radio" name="xePnrStatus" value="1" title="已取消" class="xePnrStatus${passenger.refundId}" lay-filter="xePnrStatus"/>
+							</td>
+							<tr>
+						</form>
+						@}
+					</tbody>
+				</table>
+				<div style="text-align: center;">
+					<button type="button" class="layui-btn" id="savePassengerRe" onclick="updateRefunds(' ')">保存</button>
+					<button type="button" class="layui-btn layui-btn-normal" id="checking" onclick="updateRefunds('checking')">已提交待退款</button>
+					<!--<button type="button" class="layui-btn layui-btn-normal" id="confirmRefund">确认退款</button>-->
+					
+				</div>
+				<!--</form>-->
+			</div>
+		</div>
+
+		<!--操作日志-->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title ">操作日志</h2>
+			<div class="layui-colla-content layui-show" lay-filter="log">
+				<table class="layui-table" id="logTable" lay-filter="logTable"></table>
+			</div>
+		</div>
+	</div>
+</div>
+<a id="theRefund"></a>
+<style>
+select::-ms-expand { display: none; }
+	select{  
+    width:160px;  
+    height:28px;  
+    appearance:none;  
+    background-size:10%;
+    font-size:13px;  
+    color:#666;  
+    outline:none;
+   	padding-left: 50px;
+   	border-color: #e6e6e6;
+}  
+</style>
+
+
+<script>
+	@for(passenger in refundPassenger){
+		var id=${passenger.refundId};
+		var airRemState=${passenger.airRemState};
+		var airRefundType=${passenger.airRefundType};
+		var xePnrStatus=${passenger.xePnrStatus};
+		if(xePnrStatus=="1"){
+			xePnrStatus=1;
+		}else{
+			xePnrStatus=0;
+		}
+		$("#refundType"+id+" option[value='"+airRefundType+"']").attr("selected","selected");
+		$("#isAirRet"+id+" option[value='"+airRemState+"']").attr("selected","selected");
+		$("input[type=radio][class=xePnrStatus"+id+"][value="+xePnrStatus+"]").prop("checked", true);
+		
+	@}
+</script>
+@}

@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<Response>
+	<Header ShouldRecordPerformanceTime="false" Timestamp="2020-01-02T14:02:17:488"
+		RequestID="7a9af253-adcb-4cc3-8fbd-88774913d468" ResultCode="Success"
+		AssemblyVersion="2.9.8.0" RequestBodySize="0" SerializeMode="Xml"
+		RouteStep="1" Environment="PRO" />
+	<GetCoopRefundConfirmListResponse>
+		<GetCoopRefundConfirmListItems>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11690657204</OrderId>
+				<Prid>76085598</Prid>
+				<FeeType>待确认</FeeType>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104776374</GetCoopRefundConfirmDetailItemID>
+						<RefundType>重购全退</RefundType>
+						<AirLineCode>479</AirLineCode>
+						<TicketNO>2159169537</TicketNO>
+						<IssueBillID>528588619</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>JM8YMX</RecordNO>
+						<PassengerName>范宵逢</PassengerName>
+						<Dport>PEK</Dport>
+						<Aport>NTG</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2019-12-30T23:40:00</TakeOffTime>
+						<Flight>ZH9153 </Flight>
+						<SubClass>K</SubClass>
+						<FlightChangeProve />
+						<Cost>343.0000</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0</RefundRate>
+						<RefundFee>0</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-393.0000</PayFlightAgency>
+						<PrintPrice>350.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>0</IsConfirm>
+				<Audited>F</Audited>
+				<RT_Oper>S23855</RT_Oper>
+				<RT_Time>2020-1-1 9:41:31</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>WSCAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>重购全退 航段 1 范宵逢 退/改金额 0
+					名字错，正常姓名：范霄逢，票号479-2159171881 ，已使用，此订单申请全退</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2019-12-30T23:40:00</TakeOffTime>
+				<Row>1</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>3</Urgency>
+				<RefundReason>重购全退 航段 1 范宵逢 退/改金额 0
+					名字错，正常姓名：范霄逢，票号479-2159171881 ，已使用，此订单申请全退</RefundReason>
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11922331453</OrderId>
+				<Prid>76109292</Prid>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104809868</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>479</AirLineCode>
+						<TicketNO>2159609595</TicketNO>
+						<IssueBillID>540994035</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>KRKWYR</RecordNO>
+						<PassengerName>吴琼</PassengerName>
+						<Dport>SHE</Dport>
+						<Aport>PVG</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-02T14:10:00</TakeOffTime>
+						<Flight>ZH9721 </Flight>
+						<SubClass>K</SubClass>
+						<FlightChangeProve />
+						<Cost>339.7500</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0</RefundRate>
+						<RefundFee>210.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-179.7500</PayFlightAgency>
+						<PrintPrice>350.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>2</IsConfirm>
+				<Audited>T</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-1 16:52:16</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>WSCAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 吴琼，退/改金额210.00,费率0.00。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-02T14:10:00</TakeOffTime>
+				<Row>2</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>1</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11919169416</OrderId>
+				<Prid>76110482</Prid>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104811560</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>479</AirLineCode>
+						<TicketNO>2159603954</TicketNO>
+						<IssueBillID>540784983</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>0     </RecordNO>
+						<PassengerName>吕帅</PassengerName>
+						<Dport>SHE</Dport>
+						<Aport>YNT</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-03T07:40:00</TakeOffTime>
+						<Flight>ZH9658 </Flight>
+						<SubClass>K</SubClass>
+						<FlightChangeProve />
+						<Cost>260.9500</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0</RefundRate>
+						<RefundFee>162.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-148.9500</PayFlightAgency>
+						<PrintPrice>270.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>2</IsConfirm>
+				<Audited>T</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-1 17:15:12</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>CCARD</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 吕帅，退/改金额162.00,费率0.00。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-03T07:40:00</TakeOffTime>
+				<Row>3</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>0</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11946616517</OrderId>
+				<Prid>76140195</Prid>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104852609</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>479</AirLineCode>
+						<TicketNO>2159648278</TicketNO>
+						<IssueBillID>542417721</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>0     </RecordNO>
+						<PassengerName>符娇</PassengerName>
+						<Dport>SHE</Dport>
+						<Aport>SZX</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-04T18:55:00</TakeOffTime>
+						<Flight>ZH9606 </Flight>
+						<SubClass>L</SubClass>
+						<FlightChangeProve />
+						<Cost>704.2000</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0.60</RefundRate>
+						<RefundFee>432.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-322.2000</PayFlightAgency>
+						<PrintPrice>720.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>2</IsConfirm>
+				<Audited>T</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-2 10:51:07</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>WSCAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 符娇，退/改金额432.00,费率0.60。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-04T18:55:00</TakeOffTime>
+				<Row>4</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>0</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11944829033</OrderId>
+				<Prid>76100350</Prid>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104797203</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>479</AirLineCode>
+						<TicketNO>2159641846</TicketNO>
+						<IssueBillID>542206806</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>JF3BTL</RecordNO>
+						<PassengerName>安娇娇</PassengerName>
+						<Dport>SHE</Dport>
+						<Aport>YNT</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-05T07:40:00</TakeOffTime>
+						<Flight>ZH9658 </Flight>
+						<SubClass>K</SubClass>
+						<FlightChangeProve />
+						<Cost>221.5500</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0.50</RefundRate>
+						<RefundFee>115.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-156.5500</PayFlightAgency>
+						<PrintPrice>230.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>2</IsConfirm>
+				<Audited>T</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-1 14:06:09</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>WSCAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 安娇娇，退/改金额115.00,费率0.50。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-05T07:40:00</TakeOffTime>
+				<Row>5</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>0</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11953789322</OrderId>
+				<Prid>76137515</Prid>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104848939</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>833</AirLineCode>
+						<TicketNO>2438194093</TicketNO>
+						<IssueBillID>542678682</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>JMJQ1H</RecordNO>
+						<PassengerName>王春美</PassengerName>
+						<Dport>TYN</Dport>
+						<Aport>TCZ</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-05T13:30:00</TakeOffTime>
+						<Flight>KY8306 </Flight>
+						<SubClass>Q</SubClass>
+						<FlightChangeProve />
+						<Cost>1550.0000</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0.15</RefundRate>
+						<RefundFee>236.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-1364.0000</PayFlightAgency>
+						<PrintPrice>1550.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>2</IsConfirm>
+				<Audited>T</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-2 10:11:57</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>ALIAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 王春美，退/改金额236.00,费率0.15。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-05T13:30:00</TakeOffTime>
+				<Row>6</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>0</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+			<GetCoopRefundConfirmItem>
+				<OrderId>11933455514</OrderId>
+				<Prid>76152060</Prid>
+				<FeeType>待确认</FeeType>
+				<IsForceAudited>0</IsForceAudited>
+				<RefundServerFee>0</RefundServerFee>
+				<ConversionRate>0</ConversionRate>
+				<GetCoopRefundConfirmDetailItems>
+					<GetCoopRefundConfirmDetailItem>
+						<GetCoopRefundConfirmDetailItemID>104868741</GetCoopRefundConfirmDetailItemID>
+						<RefundType>自愿</RefundType>
+						<AirLineCode>833</AirLineCode>
+						<TicketNO>2438186230</TicketNO>
+						<IssueBillID>541553364</IssueBillID>
+						<IsRebook>false</IsRebook>
+						<RecordNO>HDN1P7</RecordNO>
+						<PassengerName>顾思敏</PassengerName>
+						<Dport>NTG</Dport>
+						<Aport>CSX</Aport>
+						<Sequence>1</Sequence>
+						<TakeOffTime>2020-01-14T10:45:00</TakeOffTime>
+						<Flight>KY3038 </Flight>
+						<SubClass>Q</SubClass>
+						<FlightChangeProve />
+						<Cost>770.0000</Cost>
+						<OilFee>0</OilFee>
+						<Tax>50.0000</Tax>
+						<RefundRate>0.10</RefundRate>
+						<RefundFee>79.0000</RefundFee>
+						<UsedCost>0</UsedCost>
+						<UsedTax>0</UsedTax>
+						<PayFlightAgency>-741.0000</PayFlightAgency>
+						<PrintPrice>770.0000</PrintPrice>
+						<CommissionFee>0</CommissionFee>
+						<Subsidy>0</Subsidy>
+						<RbkID>0</RbkID>
+					</GetCoopRefundConfirmDetailItem>
+				</GetCoopRefundConfirmDetailItems>
+				<IsConfirm>0</IsConfirm>
+				<Audited>F</Audited>
+				<RT_Oper>System</RT_Oper>
+				<RT_Time>2020-1-2 13:50:20</RT_Time>
+				<FlightClass>N</FlightClass>
+				<PrepayType>WSCAN</PrepayType>
+				<Tickets>1</Tickets>
+				<RefundDesc>行程单未打印;航段1 自愿 顾思敏，退/改金额79.00,费率0.10。
+				</RefundDesc>
+				<IsRefund>F</IsRefund>
+				<TakeOffTime>2020-01-14T10:45:00</TakeOffTime>
+				<Row>7</Row>
+				<CountNumber>7</CountNumber>
+				<Urgency>0</Urgency>
+				<RefundReason />
+			</GetCoopRefundConfirmItem>
+		</GetCoopRefundConfirmListItems>
+	</GetCoopRefundConfirmListResponse>
+</Response>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="ok">
+    <order id="1608346996990" orderNo="rnf201219110250441001" allPrice="510" noPay="0.0" childPrintPrice="460"
+           childFaceValue="460" source="mobile.app.android" policySource="XXZH001-YHJ" ticketMode="手工出票"
+           policyFriendly="XLY201207221331EXVT00" insuranceUnitPrice=""
+           backnote="退票手续费收取规则：航班起飞前168小时之前，退票手续费为150元；航班起飞前72小时之前，退票手续费为200元；航班起飞前4小时之前，退票手续费为250元；航班起飞前4小时之后，退票手续费为350元同航司改期手续费收取规则：航班起飞前168小时之前，改期手续费为100元；航班起飞前72小时之前，改期手续费为150元；航班起飞前4小时之前，改期手续费为200元；航班起飞前4小时之后，改期手续费为250元签转条件：不可签转"
+           cabinnote="ZHHYZJ 500" xcdPrice="0" xcd="-" viewPrice="500" price="460.0" pnr="HTPH9N"
+           pnrBigCodeAdult="PDKHEY" pnrBigCodeChild="" tic_type="D" URL="2" fee="" XCDN="否" splitFlagShip="7" cpnr=""
+           constructionFee="50" fuelTax="0" childFuelTax="0" policyType="预付产品" status="WAIT_REFUNDMENT" contact=""
+           contactMob="" contactEmail="" createTime="2020-12-19 11:03:16.0" needPS="false"
+           lastUpdateTime="2020-12-19 11:15:12.0" qavUp="0" refundXcdDiff="false" deadline="2020-12-23 17:15:00"
+           backCashTotalPrice="0.0" totalCutPrice="0" price_type="特惠" voucherCount="0" voucherPrice="0" splitSign="0"
+           rootOrderNo="rnf201219110250441001">
+        <purchaseOrderInfo price="0.00" issue_ticket_type="手工出票" issue_ticket_platform_code="" source_transaction_id=""
+                           source_order_no="null" tpp_type="" status="支付成功" pay_commercial_no="" offline_pay_type=""
+                           offline_pay_cardno="" platform_mem_id="" operator="蜜蜂RNF" refund_price=""/>
+        <refund refund_time="" refund_price="310.00" refund_no="" type="线上退款" apply_refund_time="2020-12-19 11:15:07"
+                refund_status="31" refund_reason="17" refund_attachment_urls=""/>
+        <flight code="KY9967" cabin="E" ccabin="E" dep="CAN" arr="HYN" depDay="2020-12-24" depTime="17:15"
+                arrTime="19:05" realCode="ZH9967"/>
+        <passenger name="徐伟" birthday="1979-01-17" ageType="0" gender="男" cardType="NI" price="460.0" priceType="成人"
+                   mobile="13648396066" cardNum="332602197901179059" eticketNum="479-4212687365"></passenger>
+        <log operator="技术" time="2020-12-19 11:21:22.0" action="点开了订单详情页"/>
+        <log operator="程香" time="2020-12-19 11:20:23.0" action="点开了订单详情页"/>
+        <log operator="程香" time="2020-12-19 11:20:13.0" action="解除锁定"/>
+        <log operator="程香" time="2020-12-19 11:20:05.0" action="点开了订单处理页"/>
+        <log operator="SYSTEM" time="2020-12-19 11:15:32.0" action="触发消息通知，变化码为：0301，调用结果：失败：通知失败"/>
+        <log operator="SYSTEM" time="2020-12-19 11:15:26.0" action="触发消息通知，变化码为：0301，调用结果：失败：通知失败"/>
+        <log operator="SYSTEM" time="2020-12-19 11:15:13.0" action="触发消息通知，变化码为：0301，调用结果：失败：通知失败"/>
+        <log operator="Qunar" time="2020-12-19 11:15:12.0" action="Qunar将订单由【退款待确认】修改为【待退款】"/>
+        <log operator="Qunar派单Qunar" time="2020-12-19 11:15:07.0" action="提交了退票申请，申请原因是:填错名字、选错日期、选错航班-退旧买新；"/>
+        <log operator="Qunar派单Qunar" time="2020-12-19 11:15:07.0" action="将订单由【出票完成】修改为【退款待确认】"/>
+        <log operator="System" time="2020-12-19 11:14:53.0"
+             action="支付中心，派单转账交易成功，交易号为rnf201219110250441001ota0000，支付金额为 510.00"/>
+        <log operator="SYSTEM" time="2020-12-19 11:04:55.0" action="触发消息通知，变化码为：0204，调用结果：成功"/>
+        <log operator="管理员" time="2020-12-19 11:04:53.0"
+             action="修改订单，将【徐伟的票号】由【无】修改为【479-4212687365】；【479-4212687365】票号校验通过。"/>
+        <log operator="蜜蜂RNF" time="2020-12-19 11:04:52.0" action="强制解除锁定"/>
+        <log operator="管理员" time="2020-12-19 11:04:52.0" action="API导入订单"/>
+        <log operator="SYSTEM" time="2020-12-19 11:03:25.0" action="采购支付成功。采购订单状态为【支付成功】"/>
+        <log operator="蜜蜂RNF" time="2020-12-19 11:03:25.0" action="选择了出票方式: 手工出票"/>
+        <log operator="蜜蜂RNF" time="2020-12-19 11:03:25.0" action="点击了【出票】按钮"/>
+        <log operator="蜜蜂RNF" time="2020-12-19 11:03:23.0" action="订单锁定"/>
+        <log operator="SYSTEM" time="2020-12-19 11:03:17.0" action="触发消息通知，变化码为：0101，调用结果：成功"/>
+        <log operator="System" time="2020-12-19 11:03:16.0" action="派单成功"/>
+    </order>
+</result>

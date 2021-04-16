@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<Response>
+  <Header ShouldRecordPerformanceTime="false" Timestamp="2020-09-20T18:11:48:359" RequestID="f6946017-83a8-4c7c-8467-bbd611502e26" ResultCode="Success" AssemblyVersion="2.9.8.0" RequestBodySize="0" SerializeMode="Xml" RouteStep="1" Environment="PRO" />
+  <OpenIssueBillInfoResponse>
+    <IsVIP>false</IsVIP>
+    <IsMultiSeq>false</IsMultiSeq>
+    <IsCSDMultiPU>false</IsCSDMultiPU>
+    <IsCSDLowPricedSuperEClass>false</IsCSDLowPricedSuperEClass>
+    <IsTravelPackage>false</IsTravelPackage>
+    <SuboptimalOrder>false</SuboptimalOrder>
+    <hasBaggageAllowance>true</hasBaggageAllowance>
+    <IsReversingEntry>false</IsReversingEntry>
+    <IsUrgent>false</IsUrgent>
+    <IssueBillID>619414605</IssueBillID>
+    <IssueStatus>3</IssueStatus>
+    <IssueBillTag>128</IssueBillTag>
+    <CancelIssueStatus>0</CancelIssueStatus>
+    <TBookingDateTime>2020-09-19T11:17:33.103+08:00</TBookingDateTime>
+    <RecordNO>KX5NDK</RecordNO>
+    <OfficeNO>SHA717</OfficeNO>
+    <ExtOrderID />
+    <FlightClass>N</FlightClass>
+    <TicketType>2</TicketType>
+    <FlightAgency>3694</FlightAgency>
+    <PolicyID>375753544994</PolicyID>
+    <PolicyType>1</PolicyType>
+    <PolicyCode>YZHB2B</PolicyCode>
+    <LastPrintTicketTime>2020-09-19T12:17:33+08:00</LastPrintTicketTime>
+    <IssueRemark>YZHB2B 自己B2B 1300 10块；行李额:CTU-SZX:成人:免费托运行李额1件,每件20公斤;。</IssueRemark>
+    <IssueWay>2</IssueWay>
+    <Adtk>2020-09-19T12:17:00+08:00</Adtk>
+    <UrgeTimes>0</UrgeTimes>
+    <SaleType>AvatarOfAirlineMarketing</SaleType>
+    <RealReservationType>1</RealReservationType>
+    <CurrencyType>CNY</CurrencyType>
+    <AirlineRecodeNo>PETVKL</AirlineRecodeNo>
+    <CustomerID />
+    <LoadAccount />
+    <EIRemark />
+    <E_EIRemark />
+    <SpecialCode>埛埛埛埛</SpecialCode>
+    <OwnerAirline />
+    <FareBasis />
+    <CtripRCrule>F</CtripRCrule>
+    <FlightWay>1</FlightWay>
+    <PrintTicketTime>0001-01-01T00:00:00</PrintTicketTime>
+    <IssueBillDetailInfoList>
+      <IssueBillDetailInfo>
+        <IssueBillDetailID>946418525</IssueBillDetailID>
+        <PassengerName>林雨辰</PassengerName>
+        <Nationality />
+        <Gender>M</Gender>
+        <CardType>身份证</CardType>
+        <CardNo>440301198908268770</CardNo>
+        <BirthDate>1989-08-26T00:00:00+08:00</BirthDate>
+        <CardTimelimit>0001-01-01T00:00:00</CardTimelimit>
+        <AgeType>ADU</AgeType>
+        <PassengerType>ADU</PassengerType>
+        <Sequence>1</Sequence>
+        <Flight>ZH9410</Flight>
+        <DCity>CTU</DCity>
+        <ACity>SZX</ACity>
+        <DPort>CTU</DPort>
+        <APort>SZX</APort>
+        <Class>Y</Class>
+        <SubClass>Q</SubClass>
+        <TakeOffTime>2020-09-20T09:15:00+08:00</TakeOffTime>
+        <ArrivalTime>2020-09-20T11:45:00+08:00</ArrivalTime>
+        <PrintPrice>1250.0000</PrintPrice>
+        <ForeignPrintPrice>0.0000</ForeignPrintPrice>
+        <Cost>1219.0000</Cost>
+        <ForeignCost>0.0000</ForeignCost>
+        <ThirdPartCost>0.0000</ThirdPartCost>
+        <CostRate>0.98</CostRate>
+        <Tax>50.0000</Tax>
+        <ForeignTax>0.0000</ForeignTax>
+        <OilFee>0.0000</OilFee>
+        <ForeignOilFee>0.0000</ForeignOilFee>
+        <AgencyRecordNO>KX5NDK</AgencyRecordNO>
+        <AgencyOfficeNo>CAN421</AgencyOfficeNo>
+        <AirLineCode>479</AirLineCode>
+        <TicketNO>4210256174</TicketNO>
+        <CarrierFlight />
+        <CardTypeInt>1</CardTypeInt>
+        <SequenceType>0</SequenceType>
+        <IsAdultTicketForChild>false</IsAdultTicketForChild>
+        <RefundTokenNo>419427151</RefundTokenNo>
+      </IssueBillDetailInfo>
+    </IssueBillDetailInfoList>
+    <IssueBillRelativeInfoList />
+    <BaggagesAndMealInfos />
+    <PenaltyShowList />
+    <FlightRefundPolicySnapShotInfo>
+      <RefundPolicySnapShot>
+        <OrderID>13560312948</OrderID>
+        <RefundTokenNo>419427151</RefundTokenNo>
+        <SupplierRefundInfos>
+          <SupplierRefundInfo>
+            <PassengerType>ADU</PassengerType>
+            <RefundText>起飞前7天之前的退票手续费按票面价收取10%，起飞前7天（含）以内至起飞前3天之前收取20%，起飞前3天（含）以内至起飞前4小时之前收取30%，起飞前4小时以后及起飞后收取40%；</RefundText>
+            <EndorseText>起飞前7天之前的改期手续费按票面价收取5%，起飞前7天（含）以内至起飞前3天之前收取10%，起飞前3天（含）以内至起飞前4小时之前收取20%，起飞前4小时以后及起飞后收取30%；改期费与升舱费同时发生，需同时收取.</EndorseText>
+            <RefundBasePrice>1300</RefundBasePrice>
+            <EndorseBasePrice>1300</EndorseBasePrice>
+            <ExtraRefundFee>0</ExtraRefundFee>
+            <RefundTextDisplay>false</RefundTextDisplay>
+            <EndorseTextDisplay>false</EndorseTextDisplay>
+            <ApplicableScene>Normal</ApplicableScene>
+            <RefundExpression />
+            <NonRef>H</NonRef>
+            <NonRer>H</NonRer>
+            <RefundFeeList>
+              <RefundEndorseFeeType>
+                <FeeAmount>130</FeeAmount>
+                <FeeRate>130</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>168</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <IsReschedule />
+                <IsUpgrade />
+                <UpgradeSubClass />
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>0001-01-01 00:00:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-13 09:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>260</FeeAmount>
+                <FeeRate>260</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>72</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <IsReschedule />
+                <IsUpgrade />
+                <UpgradeSubClass />
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-13 09:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-17 09:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>390</FeeAmount>
+                <FeeRate>390</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>4</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <IsReschedule />
+                <IsUpgrade />
+                <UpgradeSubClass />
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-17 09:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-20 05:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>520</FeeAmount>
+                <FeeRate>520</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>4</BeginHour>
+                <EndHour>-9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <IsReschedule />
+                <IsUpgrade />
+                <UpgradeSubClass />
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-20 05:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>9999-12-31 00:00:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+            </RefundFeeList>
+            <EndorseFeeList>
+              <RefundEndorseFeeType>
+                <FeeAmount>65</FeeAmount>
+                <FeeRate>65</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>168</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>0001-01-01 00:00:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-13 09:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>130</FeeAmount>
+                <FeeRate>130</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>72</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-13 09:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-17 09:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>260</FeeAmount>
+                <FeeRate>260</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>4</BeginHour>
+                <EndHour>9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-17 09:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>2020-09-20 05:15:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+              <RefundEndorseFeeType>
+                <FeeAmount>390</FeeAmount>
+                <FeeRate>390</FeeRate>
+                <LeastPrice>0</LeastPrice>
+                <BasePrice>1300</BasePrice>
+                <UpgradeDiscount>0</UpgradeDiscount>
+                <TrainFeeAmount>0</TrainFeeAmount>
+                <FlightFeeAmount>0</FlightFeeAmount>
+                <BeginHour>4</BeginHour>
+                <EndHour>-9999</EndHour>
+                <ApplyTimeBegin>0</ApplyTimeBegin>
+                <ApplyTimeEnd>0</ApplyTimeEnd>
+                <FreeChangeTimes>0</FreeChangeTimes>
+                <RescheduleID>0</RescheduleID>
+                <OneTimeFee>0</OneTimeFee>
+                <NumCarryRule>0</NumCarryRule>
+                <ConcurrentFee>0</ConcurrentFee>
+                <ChargeStand>PrintPrice</ChargeStand>
+                <NonRef>H</NonRef>
+                <ApplyBeginTime>2020-09-20 05:15:00.000</ApplyBeginTime>
+                <ApplyEndTime>9999-12-31 00:00:00.000</ApplyEndTime>
+              </RefundEndorseFeeType>
+            </EndorseFeeList>
+          </SupplierRefundInfo>
+        </SupplierRefundInfos>
+      </RefundPolicySnapShot>
+    </FlightRefundPolicySnapShotInfo>
+    <AdditionalBaggageInfos>
+      <FlightAdditionalBaggageInfo>
+        <bgweight>20</bgweight>
+        <bgnumber>1</bgnumber>
+        <bgdesc_ch />
+        <type>0</type>
+        <LuggageType>1</LuggageType>
+        <checkbgsize>40×60×100</checkbgsize>
+      </FlightAdditionalBaggageInfo>
+      <FlightAdditionalBaggageInfo>
+        <bgweight>5</bgweight>
+        <bgnumber>1</bgnumber>
+        <bgdesc_ch />
+        <type>1</type>
+        <LuggageType>0</LuggageType>
+        <checkbgsize>20*40*55</checkbgsize>
+      </FlightAdditionalBaggageInfo>
+    </AdditionalBaggageInfos>
+  </OpenIssueBillInfoResponse>
+</Response>

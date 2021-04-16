@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.RefundMapper">
+
+	<sql id="refundSql">
+		<where>
+			<if test="cAppStartDate!=null">
+				AND r.C_APP_DATE BETWEEN #{cAppStartDate} AND #{cAppEndDate}
+			</if>
+			<if test="orderSource!=null">
+				AND r.order_source=#{orderSource}
+			</if>
+			<if test="orderShop!=null">
+				AND r.Order_shop=#{orderShop}
+			</if>
+			<if test="retNo!=null">
+				AND r.RET_NO=#{retNo}
+			</if>
+			<if test="orderNo!=null">
+				AND r.order_no=#{orderNo}
+			</if>
+			<if test="flightNo!=null">
+				AND r.flight_no=#{flightNo}
+			</if>
+			<if test="name!=null">
+				AND r.passenger_Name like CONCAT('%',#{name},'%')
+			</if>
+			<if test="ticketNo!=null">
+				AND r.ticket_no like CONCAT('%',#{ticketNo},'%')
+			</if>
+			<if test="flightStartDate!=null">
+				AND r.Flight_date BETWEEN #{flightStartDate} and #{flightEndDate}
+			</if>
+			<if test="cRemState!=null and cRemState!=-2">
+				AND r.C_REM_STATE=#{cRemState}
+			</if>
+            <if test="airRemState!=null">
+                AND r.AIR_REM_STATE=#{airRemState}
+            </if>
+            <if test="xepnrStatus!=null">
+                AND r.XEPNR_STATUS=#{xepnrStatus}
+            </if>
+            <if test="isAuto!=null">
+                AND r.is_auto=#{isAuto}
+            </if>
+            <if test="processBy!=null">
+                AND r.process_by=#{processBy}
+            </if>
+		</where>
+	</sql>
+	<!--获取退单列表 -->
+	<select id="getRefundList" resultType="cn.ssq.ticket.system.entity.RefundVO"
+		parameterType="cn.ssq.ticket.system.queryEntity.RefundQuery">
+		SELECT r.refund_id,r.order_no,r.RET_NO,r.create_by,
+		r.Flight_date,r.flight_no,
+		r.C_REAL_PRICE,r.passenger_Name,
+		r.C_REM_STATE,r.C_APP_DATE,
+		r.AIR_REM_STATE,r.AIR_APP_DATE,
+		r.AIR_ESTIMATE_PRICE,r.AIR_REAL_PRICE,
+		r.Refund_type,r.XEPNR_STATUS,r.flight_status,r.ORDERREMARK,r.flight_time,r.air_refund_type,
+		r.process_by FROM t_refund AS r
+		<include refid="refundSql" /> 
+		order by C_APP_DATE desc 
+		LIMIT #{jump},#{page}
+	</select>
+	<select id="getRefundListCount" parameterType="cn.ssq.ticket.system.queryEntity.RefundQuery"
+		resultType="int">
+		SELECT COUNT(1) FROM t_refund AS r
+		<include refid="refundSql" />
+	</select>
+	<!--获取退票单关联的乘机人 -->
+	<select id="getRefundPassenger" resultType="cn.ssq.ticket.system.entity.Passenger">
+		SELECT p.passenger_id
+		AS passengerId,
+		p.name AS name,
+		p.IS_IM_RET AS isImRet,
+		p.passenger_type as passengerType,
+		p.ticket_no AS ticketNo
+		FROM t_refund r JOIN t_passenger p ON r.passenger_id=p.passenger_id
+		WHERE r.RET_NO=#{retNo}
+	</select>
+
+	<select id="getRefund" resultType="cn.ssq.ticket.system.entity.Refund">
+		SELECT 
+		RET_NO,C_REAL_PRICE,C_REM_DATE,C_REM_STATE FROM t_refund where 
+		
+		RET_NO=#{retNo}
+	</select>
+
+	<!--更新退票单 -->
+	<update id="updateRefund" parameterType="cn.ssq.ticket.system.entity.Refund">
+		UPDATE t_refund SET
+        air_refund_type=#{airRefundType},AIR_REM_STATE=#{airRemState},XEPNR_STATUS=#{xePnrStatus}
+		<!-- <if test="cRealPrice!=''"> -->
+			,C_REAL_PRICE=#{cRealPrice}
+		<!-- </if> -->
+		<!-- <if test="airRealPrice!=''"> -->
+			,AIR_REAL_PRICE=#{airRealPrice}
+		<!-- </if> -->
+		<!-- <if test="airEstimatePrice!=''"> -->
+			,AIR_ESTIMATE_PRICE=#{airEstimatePrice}
+		<!-- </if> -->
+        <if test="refundType!=null">
+            ,Refund_type=#{refundType}
+        </if>
+		<if test="cAppDate!=''">
+			,C_APP_DATE=#{cAppDate}
+		</if> 
+		<if test="cRemDate!=''">
+			,C_REM_DATE=#{cRemDate}
+		</if>
+		<if test="airAppDate!=''">
+			,AIR_APP_DATE=#{airAppDate}
+		</if>
+		<if test="airRemDate!=''">
+			,AIR_REM_DATE=#{airRemDate}
+		</if>
+		<if test="remark!=null">
+			,REMARK=#{remark}
+		</if>
+		<if test="createBy!=''">
+			,create_by=#{createBy}
+		</if>
+		<if test="processBy!=''">
+			,process_by=#{processBy}
+		</if>
+		 WHERE refund_id=#{refundId}
+	</update>
+	<!-- 删除退票单 -->
+	<delete id="deleteRefund">
+		delete from t_refund where RET_NO in
+		<foreach collection="array" open="(" close=")" separator=","
+			item="retNo" index="i">
+			#{retNo}
+		</foreach>
+	</delete>
+	
+	  <resultMap id="reportData" type="cn.ssq.ticket.system.entity.RefundVO">
+       <!--  <id column="order_id" property="orderId"/> -->
+        <result column="order_no" property="orderNo"/>
+        <result column="Order_shop" property="orderShop"/>
+        <result column="order_source" property="orderSource"/>
+        <result column="ticket_no" property="ticketNo"/>
+        <result column="RET_NO" property="retNo"/>
+		<result column="flight_no" property="flightNo"/>
+        <result column="arr_city_code" property="arrCityCode"/>
+        <result column="dep_city_code" property="depCityCode"/>
+        <result column="passenger_Name" property="passengerName"/>
+        <result column="create_by" property="createBy"/>
+        <result column="process_by" property="processBy"/>
+        <result column="C_REAL_PRICE" property="cRealPrice"/>
+        <result column="C_REM_STATE" property="cRemState"/>
+        <result column="C_REM_DATE" property="cRemDate"/>
+		<result column="AIR_REM_STATE" property="airRemState"/>
+		<result column="AIR_APP_DATE" property="airAppDate"/>
+		<result column="AIR_REM_DATE" property="airRemDate"/>
+		<result column="AIR_REAL_PRICE" property="airRealPrice"/>
+		<result column="AIR_ESTIMATE_PRICE" property="airEstimatePrice"/>
+		<result column="create_date" property="createDate"/>
+		<result column="airline_code" property="airlineCode"/>
+		<result column="Flight_date" property="flightDate"/>
+          <result column="business_no" property="businessNo"/>
+          <result column="Refund_type" property="refundType"/>
+          <result column="air_refund_type" property="airRefundType"/>
+		<result column="REMARK" property="remark"/>
+        <association property="passenger" javaType="cn.ssq.ticket.system.entity.Passenger">
+			<id column="passenger_id" property="passengerId"/>
+			<result column="print_ticket_by" property="printTicketBy"/>
+			<result column="POLICY_TYPE" property="policyType"/>
+			<result column="print_ticket_date" property="printTicketDate"/>
+			<result column="print_Ticket_Cabin" property="printTicketCabin"/>
+		</association>
+    </resultMap>
+	<!--导出报表数据  -->
+	<select id="getDataForReport" resultMap="reportData">
+	SELECT  r.order_id,r.order_no,r.Order_shop,r.order_source,r.ticket_no,r.RET_NO,r.flight_no,r.arr_city_code,r.dep_city_code,
+			r.passenger_Name,r.C_REAL_PRICE,r.create_by,r.C_REM_STATE,r.C_REAL_PRICE,r.C_REM_DATE,
+			r.AIR_REM_STATE,r.AIR_APP_DATE,r.C_REM_DATE,r.AIR_REM_DATE,r.airline_code,r.process_by,
+            r.AIR_REAL_PRICE,r.AIR_ESTIMATE_PRICE,r.REMARK,r.create_date,r.Flight_date, r.business_no, r.Refund_type,
+			p.passenger_id,p.print_ticket_by,p.POLICY_TYPE,p.print_Ticket_Cabin,p.print_ticket_date 
+	FROM t_refund r  LEFT JOIN t_passenger p ON r.passenger_Name =p.name  AND r.order_id=p.order_id 
+	WHERE r.create_date BETWEEN #{startDate} AND #{endDate} 
+			<if test="orderSorce!=null">
+				AND r.order_source=#{orderSorce} 
+			</if>
+			<if test="orderShop!=null">
+				AND r.order_shop=#{orderShop}
+			</if> 
+	</select>
+
+    <select id="getDataForReportList" resultMap="reportData" parameterType="cn.ssq.ticket.system.queryEntity.RefundQuery">
+        SELECT  r.order_id,r.order_no,r.Order_shop,r.order_source,r.ticket_no,r.RET_NO,r.flight_no,r.arr_city_code,r.dep_city_code,
+        r.passenger_Name,r.C_REAL_PRICE,r.create_by,r.C_REM_STATE,r.C_REAL_PRICE,r.C_REM_DATE,
+        r.AIR_REM_STATE,r.AIR_APP_DATE,r.C_REM_DATE,r.AIR_REM_DATE,r.airline_code,r.process_by,
+        r.AIR_REAL_PRICE,r.AIR_ESTIMATE_PRICE,r.REMARK,r.create_date,r.Flight_date, r.business_no, r.Refund_type,
+        p.passenger_id,p.print_ticket_by,p.POLICY_TYPE,p.print_Ticket_Cabin,p.print_ticket_date
+        FROM t_refund r  LEFT JOIN t_passenger p ON r.passenger_Name =p.name  AND r.order_id=p.order_id
+        <include refid="refundSql" />
+    </select>
+
+	
+	
+	
+	 <!--添加订单处理人  -->
+    <update id="addProcess">
+        update t_refund set process_by=#{process} where RET_NO=#{retNo}
+    </update>
+    
+    <update id="addProcessById">
+        update t_refund set process_by=#{process} WHERE refund_id=#{refundId}
+    </update>
+    
+    <!--解锁-->
+    <update id="deleteProcess">
+        update t_refund set process_by=null,is_auto="0" where RET_NO=#{retNo}
+    </update>
+    
+     <update id="deleteProcessById">
+        update t_refund set process_by=null WHERE refund_id=#{refundId}
+    </update>
+    <!--是否被锁  -->
+    <select id="isHavePcocess" resultType="string">
+    	select process_by from t_refund where RET_NO=#{retNo}
+    </select>
+    
+    
+    <select id="isHavePcocessById" resultType="string">
+    	select process_by from t_refund   WHERE refund_id=#{refundId}
+    </select>
+	
+	<update id="initializedPassengerRefund">
+		UPDATE t_passenger SET status="3",IS_IM_RET="0" WHERE order_no=#{orderNo} AND name=#{name}
+	</update>
+	
+	
+</mapper>

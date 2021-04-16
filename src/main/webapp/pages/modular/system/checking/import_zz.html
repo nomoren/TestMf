@@ -1,0 +1,23 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/checking/checking.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="layui-body-header">
+	<span class="layui-body-header-title">导入任务</span>
+</div>
+
+<div class="layui-fluid">
+	<button type="button" class="layui-btn" id="uploadAliPayChecking">
+  		<i class="layui-icon">&#xe67c;</i>支付宝账单
+	</button>
+	&nbsp;&nbsp;
+	<button type="button" class="layui-btn" id="uploadYiBaoOrderChecking">
+		<i class="layui-icon">&#xe67c;</i>易宝支出账单
+	</button>
+	&nbsp;&nbsp;
+	<button type="button" class="layui-btn" id="uploadYiBaoRefundChecking">
+		<i class="layui-icon">&#xe67c;</i>易宝退款账单
+	</button>
+	<!-- <a href="${ctxPath}/export/exportPurchReportModel" style="color: #08c;">采购单导入模板</a> -->
+	
+	<table class="layui-table" id="importTable" lay-filter="importTable"></table>
+</div>
+@}

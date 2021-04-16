@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.ChangeMapper">
+	<!-- 删除改签单 -->
+	<delete id="deleteChange">
+		delete from t_change where change_id in
+		<foreach collection="array" open="(" close=")" separator=","
+			item="changeIds" index="i">
+			#{changeIds}
+		</foreach>
+	</delete>
+	
+	<update id="initializedPassengerChange">
+		UPDATE t_passenger SET status="8",IS_IM_CHANGE="1" WHERE order_no=#{orderNo} AND name=#{name}
+	</update>
+	
+	
+		 <!--添加订单处理人  -->
+    <update id="addProcess">
+        update t_change set process_by=#{process} where NEW_C_ORDER_NO=#{changeNo}
+    </update>
+    <!--解锁-->
+    <update id="deleteProcess">
+        update t_change set process_by=null where NEW_C_ORDER_NO=#{changeNo}
+    </update>
+    
+    <!--修改状态-->
+    <update id="updateStatus">
+        update t_change set state=#{state} where order_no=#{orderNo}
+    </update>
+    
+    
+    <!--是否被锁  -->
+    <select id="isHavePcocess" resultType="string">
+    	select process_by from t_change where NEW_C_ORDER_NO=#{changeNo}
+    </select>
+    
+	<!-- 根据改签单号与乘客姓名 -->
+	<update id="updateByChangeNo" parameterType="cn.ssq.ticket.system.entity.Change">
+		update t_change 
+		set state = #{state}, TKT_NO = #{tktNo}
+		where NEW_C_ORDER_NO = #{newCOrderNo}
+		and passenger_Name = #{passengerName}
+	</update>
+	
+	<!-- 更新改签票号与改签状态 -->
+	<update id="updateByticketNo" parameterType="cn.ssq.ticket.system.entity.Change">
+		update t_change 
+		set state = #{state}, TKT_NO = NULL
+		where order_no = #{orderNo}
+		and TKT_NO = #{tktNo}
+	</update>
+	
+</mapper>

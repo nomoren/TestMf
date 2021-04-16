@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GB2312"?>
+<rt_parse ret_value="1">
+	<pnr>HDR41V</pnr>
+	<b_pnr>PKXW2W</b_pnr>
+	<is_team>0</is_team>
+	<team_pc>0</team_pc>
+	<HasNI>1</HasNI>
+	<HasINF>0</HasINF>
+	<IsCHD>0</IsCHD>
+	<remark>RMK TJ AUTH SHA384 |RMK CA/PKXW2W</remark>
+	<osi>OSI ZH CTCM13976945193/P1|OSI ZH CTCT17002805901 |OSI ZH
+		CTCT057156888688 |OSI 1E TKNO/479|OSI 1E TKNO/479</osi>
+	<passengers count="1">
+		<passenger>
+			<Name>廖发品</Name>
+			<Ticket></Ticket>
+			<NI>513023199309193719</NI>
+		</passenger>
+	</passengers>
+	<lines count="1">
+		<Line>
+			<AirLine>ZH9347</AirLine>
+			<Cabin>K</Cabin>
+			<Discount></Discount>
+			<DepartureCity>NNG</DepartureCity>
+			<DestinationCity>HAK</DestinationCity>
+			<DepartureAirPort></DepartureAirPort>
+			<DestinationAirPort></DestinationAirPort>
+			<Date>05APR</Date>
+			<State>RR</State>
+			<StartTime>21:50</StartTime>
+			<ArriveTime>22:50</ArriveTime>
+			<ST>T2</ST>
+			<AT></AT>
+		</Line>
+	</lines>
+</rt_parse>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="ok">
+	<order id="1575734376432" orderNo="rnf191207235917251001"
+		allPrice="411" noPay="0.0" childPrintPrice="530" childFaceValue="530"
+		source="mobile.app.iphone" policySource="BZHB2B" ticketMode="手工出票"
+		policyFriendly="XLY191207200719Z54A00" insuranceUnitPrice=""
+		backnote="同舱更改条件：航班起飞前168小时之前，改期手续费为74元；航班起飞前72小时之前，改期手续费为111元；航班起飞前4小时之前，改期手续费为148元；航班起飞前4小时之后，改期手续费为222元退票条件：航班起飞前168小时之前，退票手续费为148元；航班起飞前72小时之前，退票手续费为185元；航班起飞前4小时之前，退票手续费为222元；航班起飞前4小时之后，退票手续费为296元签转条件：不可签转"
+		cabinnote="SJ 370" xcdPrice="0" xcd="-" viewPrice="370" price="361.0"
+		pnr="KNQ9L5" pnrBigCodeAdult="ND2RRR" pnrBigCodeChild="" tic_type="D"
+		URL="0" fee="" XCDN="否" splitFlagShip="2" cpnr="" constructionFee="50"
+		fuelTax="0" childFuelTax="0" policyType="预付产品" status="TICKET_OK"
+		contact="" contactMob="" contactEmail="" createTime="2019-12-07 23:59:36.0"
+		needPS="false" qavUp="0" refundXcdDiff="false" splitSign="0"
+		rootOrderNo="rnf191207235917251001">
+		<purchaseOrderInfo price="0.00" issue_ticket_type="手工出票"
+			issue_ticket_platform_code="" source_transaction_id=""
+			source_order_no="null" tpp_type="" status="支付成功" pay_commercial_no=""
+			offline_pay_type="" offline_pay_cardno="" platform_mem_id=""
+			operator="梁伟峰" refund_price="" />
+		<flight code="KY9684" cabin="L" ccabin="Y" dep="DLC" arr="NTG"
+			depDay="2019-12-14" depTime="16:30" arrTime="18:30" realCode="ZH9684" />
+		<passenger name="蒋景辉" birthday="1967-02-06" ageType="0"
+			gender="男" cardType="NI" price="361.0" priceType="成人" cardNum="210381196702062734"
+			eticketNum="479-2159195485"></passenger>
+		<log operator="技术" time="2019-12-09 15:53:13.0" action="点开了订单详情页" />
+		<log operator="System" time="2019-12-08 00:15:16.0"
+			action="支付中心，派单转账交易成功，交易号为rnf191207235917251001ota0000，支付金额为 411.00" />
+		<log operator="梁伟峰" time="2019-12-08 00:05:19.0" action="点开了订单详情页" />
+		<log operator="梁伟峰" time="2019-12-08 00:05:15.0"
+			action="使用了【贴票号】功能，修改订单，将【蒋景辉的票号】由【无】修改为【479-2159195485】；【479-2159195485】票号校验通过。" />
+		<log operator="梁伟峰" time="2019-12-08 00:05:13.0" action="点击了【出票完成】按钮" />
+		<log operator="梁伟峰" time="2019-12-08 00:04:40.0" action="点开了订单详情页" />
+		<log operator="SYSTEM" time="2019-12-08 00:04:39.0" action="采购支付成功。采购订单状态为【支付成功】" />
+		<log operator="梁伟峰" time="2019-12-08 00:04:39.0" action="选择了出票方式: 手工出票" />
+		<log operator="梁伟峰" time="2019-12-08 00:04:39.0" action="点击了【出票】按钮" />
+		<log operator="梁伟峰" time="2019-12-08 00:03:35.0" action="点开了订单处理页" />
+		<log operator="System" time="2019-12-07 23:59:36.0" action="派单成功" />
+	</order>
+</result>

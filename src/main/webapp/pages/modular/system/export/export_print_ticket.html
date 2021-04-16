@@ -1,0 +1,45 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/export/export_print_ticket.js"]}){
+	<form class="layui-form" action="" id="printTicket" style="margin-top: 20px;">
+		<div class="layui-inline">
+			<label class="layui-form-label">出票开始</label>
+			<div class="layui-input-inline">
+				<input type="text" id="startDate" name="startDate" required lay-verify="required" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">出票结束</label>
+			<div class="layui-input-inline">
+				<input type="text" id="endDate" name="endDate" required lay-verify="required" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">订单来源</label>
+			<div class="layui-input-block">
+				<select name="orderSource" lay-verify="required" id="status">
+					<option value="0">全部</option>
+					<option value="1">携程</option>
+					<option value="02">TTS</option>
+					<option value="03">酷讯</option>
+					<option value="04">淘宝</option>
+					<option value="05">同程</option>
+					<option value="06">途牛</option>
+					<option value="07">就旅行</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">店铺</label>
+			<div class="layui-input-block">
+				<select name="orderShop"  id="status">
+					<option value="0">全部</option>
+					<option value="1">1店</option>
+					<option value="2">2店</option>
+					<option value="3">3店</option>
+				</select>
+			</div>
+		</div>
+		<br />
+		<button class="layui-btn" id="exportPrintTicket" lay-submit lay-filter="exportPrintTicket" style="margin-left: 110px;margin-top: 10px;">导出报表</button>
+	</form>
+
+@}

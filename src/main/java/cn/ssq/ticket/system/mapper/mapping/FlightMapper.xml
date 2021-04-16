@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.FlightMapper">
+
+	<!--根据订单号查询航段信息 -->
+	<select id="selectFlightInfo" resultType="cn.ssq.ticket.system.entity.Flight">
+		SELECT 
+		flight_id,flight_no,airline_code,flight_type,dep_time,arr_time,
+		dep_city_code,arr_city_code,cabin,Flight_dep_date,
+		CONCAT(Flight_dep_date,' ',dep_time) AS depTimes,
+		CONCAT(Flight_arr_date,' ',arr_time) AS arrTimes 
+		FROM t_flight 
+		WHERE 
+		order_no=#{orderNo}
+	</select>
+
+
+	<!--根据订单id查询航段信息 -->
+	<select id="selectFlightInfoByOrderId" resultType="cn.ssq.ticket.system.entity.Flight">
+		SELECT 
+		flight_id,flight_no,airline_code,flight_type,dep_time,arr_time,
+		dep_city_code,arr_city_code,cabin,Flight_dep_date,
+		CONCAT(Flight_dep_date,' ',dep_time) AS depTimes,
+		CONCAT(Flight_arr_date,' ',arr_time) AS arrTimes 
+		FROM t_flight 
+		WHERE 
+		order_id=#{orderId}
+	</select>
+
+
+	<resultMap id="FlightChangneOrder" type="cn.ssq.ticket.system.entity.FlightVO">
+		<id column="flight_id" property="flightId" />
+		<result column="order_no" property="orderNo" />
+		<result column="order_source" property="orderSource" />
+		<result column="order_shop" property="orderShop" />
+		<result column="Flight_dep_date" property="flightDepDate" />
+		<result column="dep_time" property="depTime" />
+		<result column="flight_no" property="flightNo" />
+		<result column="flight_change" property="flightChange" />
+		<result column="Modify_date" property="modifyDate" />
+		<collection property="passengers"
+			ofType="cn.ssq.ticket.system.entity.Passenger">
+			<id column="passenger_id" property="passengerId" />
+			<result column="name" property="name" />
+			<result column="ticket_no" property="ticketNo" />
+		</collection>
+	</resultMap>
+
+
+	<select id="getFlightChangneInfo" resultMap="FlightChangneOrder"
+		parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery">
+		SELECT f.flight_id,f.order_id,f.order_no,
+		f.Flight_dep_date,f.dep_time,
+		f.flight_no,f.Modify_date,
+		f.order_source,f.Order_shop,
+		f.flight_change,f.dep_time,
+		p.name,p.passenger_id,p.ticket_no
+		FROM t_flight f LEFT JOIN t_passenger p ON f.order_id=p.order_id 
+		WHERE f.Flight_dep_date BETWEEN #{startDate} and #{endDate} 
+		<if test="orderNo!=null">
+			and f.order_no=#{orderNo} 
+		</if>
+		<if test="flight!=null">
+			and f.flight_no=#{flight} 
+		</if>
+		<if test="name!=null">
+			and p.name=#{name} 
+		</if>
+		<if test="ticketNo!=null">
+			and p.ticket_no=#{ticketNo} 
+		</if>
+		order by f.Flight_dep_date desc 
+		limit #{jump},#{limit}
+	</select>
+
+	<select id="getFlightChangneInfoCount" resultType="int"
+		parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery">
+		SELECT COUNT(1) 
+		FROM t_flight f LEFT JOIN t_passenger p ON 
+		f.order_id=p.order_id 
+		WHERE f.Flight_dep_date BETWEEN #{startDate} and #{endDate} 
+		<if test="orderNo!=null">
+			and f.order_no=#{orderNo} 
+		</if>
+		<if test="flight!=null">
+			and f.flight_no=#{flight} 
+		</if>
+		<if test="name!=null">
+			and p.name=#{name} 
+		</if>
+		<if test="ticketNo!=null">
+			and p.ticket_no=#{ticketNo}
+		</if>
+
+	</select>
+
+	<select id="getFlightChangneList" resultMap="FlightChangneOrder"
+		parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery">
+		SELECT f.flight_id,f.order_id,f.order_no,
+		f.Flight_dep_date,f.flight_no,f.Modify_date,
+		f.order_source,f.Order_shop,
+		f.flight_change,f.dep_time,
+		p.name,p.passenger_id,p.ticket_no 
+		FROM 
+		t_flight f LEFT JOIN t_passenger p ON f.order_id=p.order_id 
+		<!-- WHERE f.flight_change!=null -->
+		order by f.Flight_dep_date desc 
+		limit #{jump},#{limit}
+	</select>
+
+	<select id="getFlightChangneCount" resultType="int">
+		SELECT COUNT(1) 
+		FROM t_flight f LEFT JOIN t_passenger p ON 
+		f.order_id=p.order_id
+		<!-- WHERE f.flight_change!=null -->
+	</select>
+
+</mapper>

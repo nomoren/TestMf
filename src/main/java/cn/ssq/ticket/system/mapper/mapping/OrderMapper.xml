@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.OrderMapper">
+
+	<sql id="orderSql">
+		FROM t_order o
+		WHERE o.create_date BETWEEN #{startDate} and #{endDate}
+		<if test="orderSource!=null">
+			and o.order_source=#{orderSource}
+		</if>
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+		<if test="orderNo!=null">
+			and o.order_no=#{orderNo}
+		</if>
+		<if test="flight!=null">
+			and o.flight_no=#{flight}
+		</if>
+		<if test="orderStatus!=null">
+			and o.status=#{orderStatus}
+		</if>
+		<if test="flightStartDate!=null">
+			and o.Flight_date BETWEEN #{flightStartDate} and
+			#{flightEndDate}
+		</if>
+		order by o.create_date desc
+	</sql>
+
+
+
+	<sql id="orderVOSql">
+		FROM t_order o LEFT JOIN t_passenger p ON o.order_id=p.order_id
+		WHERE o.create_date BETWEEN #{startDate} and #{endDate}
+		<if test="orderSource!=null">
+			and o.order_source=#{orderSource}
+		</if>
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+		<if test="name!=null">
+			and p.name=#{name}
+		</if>
+		<if test="pnr!=null">
+			and p.pnr=#{pnr}
+		</if>
+		<if test="ticketNo!=null">
+			and p.ticket_no=#{ticketNo}
+		</if>
+		<if test="orderNo!=null">
+			and o.order_no=#{orderNo}
+		</if>
+		<if test="flight!=null">
+			and o.flight_no=#{flight}
+		</if>
+		<if test="orderStatus!=null">
+			and o.status=#{orderStatus}
+		</if>
+		<if test="flightStartDate!=null">
+			and o.Flight_date BETWEEN #{flightStartDate} and
+			#{flightEndDate}
+		</if>
+		group by o.order_id
+		order by o.create_date desc
+	</sql>
+
+	<resultMap id="orderMap" type="cn.ssq.ticket.system.entity.OrderVO">
+		<id column="order_id" property="orderId" />
+		<result column="order_no" property="orderNo" />
+		<result column="order_source" property="orderSource" />
+		<result column="trip_Type" property="tripType" />
+		<result column="status" property="status" />
+		<result column="policy_type" property="policyType" />
+		<result column="create_date" property="createDate" />
+		<result column="total_price" property="totalPrice" />
+		<result column="Passenger_count" property="passengerCount" />
+		<result column="flightDateNo" property="flightDateNo" />
+		<result column="process_by" property="processBy" />
+		<result column="Flight_date" property="flightDate" />
+		<result column="flight_no" property="flightNo" />
+		<result column="pnr_txt" property="pnr" />
+		<result column="C_order_no" property="cOrderNo" />
+		<result column="c_add_date" property="cAddDate" />
+		<result column="tic_type" property="ticType" />
+		<result column="last_print_ticket_time" property="lastPrintTicketTime" />
+	</resultMap>
+	<!-- 分页查询订单vo列表 -->
+	<select id="selectOrderVoList" parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery"
+		resultMap="orderMap">
+		SELECT o.order_id,o.order_no,o.trip_type,o.process_by,
+		o.Flight_date,o.flight_no,o.order_source,
+		o.total_price,o.Passenger_count,
+		o.status,o.policy_type,o.create_date,o.pnr_txt,
+		o.C_order_no,o.c_add_date,o.last_print_ticket_time,o.tic_type
+		<include refid="orderVOSql" />
+		limit #{jump},#{limit}
+	</select>
+
+	<!-- 分页查询订单列表 -->
+	<select id="selectOrderList" parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery"
+		resultType="cn.ssq.ticket.system.entity.Order">
+		SELECT o.order_id,o.order_no,o.trip_type,o.process_by,
+		o.Flight_date,o.flight_no,o.order_source,
+		o.total_price,o.Passenger_count,
+		o.status,o.policy_type,o.create_date,o.pnr_txt as pnr,
+		o.C_order_no,o.c_add_date,o.last_print_ticket_time,o.tic_type
+		<include refid="orderSql" />
+		limit #{jump},#{limit}
+	</select>
+
+	<!-- 查询符合条件的订单数量 -->
+	<select id="selectOrderCount" parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery"
+		resultType="int">
+		SELECT count(1)
+		<include refid="orderSql" />
+	</select>
+	<select id="selectOrderVoCount" parameterType="cn.ssq.ticket.system.queryEntity.OrderQuery"
+		resultType="int">
+		SELECT count(1) FROM (SELECT o.order_id
+		<include refid="orderVOSql" />
+		) d
+	</select>
+
+	<resultMap id="orderDetails" type="cn.ssq.ticket.system.entity.OrderVO">
+		<id column="order_id" property="orderId" />
+		<result column="order_no" property="orderNo" />
+		<result column="C_order_no" property="cOrderNo" />
+		<result column="trip_Type" property="tripType" />
+		<result column="status" property="status" />
+		<result column="create_date" property="createDate" />
+		<result column="total_tax" property="totalTax" />
+		<result column="total_price" property="totalPrice" />
+		<result column="cabin" property="cabin" />
+		<result column="Passenger_count" property="passengerCount" />
+		<result column="relation_name" property="relationName" />
+		<result column="Ticket_REMARK" property="ticketRemark" />
+		<result column="recipt_way" property="reciptWay" />
+		<result column="order_source" property="orderSource" />
+		<result column="website_order_source" property="websiteOrderSource" />
+		<result column="Order_shop" property="orderShop" />
+		<result column="recipt_way" property="reciptWay" />
+		<result column="create_date" property="createDate" />
+		<result column="flight_no" property="flightNo" />
+		<result column="Flight_date" property="flightDate" />
+		<result column="c_add_date" property="cAddDate" />
+		<result column="policy_type" property="policyType" />
+		<result column="flight_date" property="flightDate" />
+		<result column="pnr_txt" property="pnr" />
+		<result column="policy_remark" property="policyRemark" />
+		<result column="last_print_ticket_time" property="lastPrintTicketTime" />
+		<result column="tic_type" property="ticType" />
+		<result column="policy_type_des" property="policyTypeDes" />
+		<result column="big_pnr" property="bigPnr" />
+		<result column="TRA_status" property="traStatus" />
+        <result column="dep_city_code" property="depCityCode" />
+        <result column="arr_city_code" property="arrCityCode" />
+        <result column="cabin" property="cabin" />
+        <result column="process_by" property="processBy" />
+		<collection property="passengetList"
+			ofType="cn.ssq.ticket.system.entity.Passenger">
+			<id column="passenger_id" property="passengerId" />
+			<result column="name" property="name" />
+			<result column="ticket_price" property="ticketPrice" />
+			<result column="passenger_type" property="passengerType" />
+			<result column="cert_type" property="certType" />
+			<result column="cert_no" property="certNo" />
+			<result column="ticket_no" property="ticketNo" />
+			<result column="tax" property="tax" />
+			<result column="fee" property="fee" />
+			<result column="PURCH_PRICE" property="purchPrice" />
+			<result column="ACTUAL_PRICE" property="actualPrice" />
+			<result column="pnr" property="pnr" />
+			<result column="sell_price" property="sellPrice" />
+			<result column="BACK_POINT" property="backPoint" />
+			<result column="print_ticket_date" property="printTicketDate" />
+			<result column="print_Ticket_Cabin" property="printTicketCabin" />
+			<result column="print_ticket_by" property="printTicketBy" />
+			<result column="dep_city_code" property="depCityCode" />
+			<result column="arr_city_code" property="arrCityCode" />
+			<result column="pcabin" property="cabin" />
+			<result column="pstatus" property="status" />
+			<result column="c_children_id" property="cChildrenId" />
+			<result column="ticket_status" property="ticketStatus" />
+			<result column="birthday" property="birthday" />
+			<result column="flight_no" property="flightNo" />
+			<result column="print_ticket_by" property="printTicketBy" />
+			<result column="pnr" property="pnr" />
+		</collection>
+	</resultMap>
+	<!--根据订单号查询订单详情 -->
+	<select id="selectOrderDetails" resultMap="orderDetails">
+		SELECT o.order_id,o.order_no,
+		o.C_order_no,o.c_add_date,
+		o.trip_type,o.total_tax,
+		o.total_price,o.cabin,
+		o.flight_date,o.TRA_status,
+		o.Passenger_count,o.status,
+		o.flight_no,o.relation_name,
+		o.policy_type,o.Ticket_REMARK,
+		o.recipt_way,o.order_source,o.website_order_source,o.Order_shop,
+		o.last_print_ticket_time,o.policy_remark,
+		o.tic_type,o.policy_type_des,o.big_pnr,
+        o.dep_city_code,o.arr_city_code,o.cabin,o.process_by,
+		p.passenger_id,p.name,o.pnr_txt,
+		p.ticket_price,p.passenger_type,
+		p.cert_type,p.cert_no,p.pnr,p.status as pstatus,
+		p.ticket_no,p.tax,p.fee,p.sell_price,
+		p.PURCH_PRICE,p.ACTUAL_PRICE,p.BACK_POINT,
+		p.print_ticket_date,p.print_Ticket_Cabin,
+		p.print_ticket_by,p.ticket_status,
+		p.c_children_id,p.birthday,p.flight_no,
+		p.cabin as pcabin,p.pnr,p.print_ticket_by  
+		FROM t_order o JOIN t_passenger p ON o.order_id=p.order_id
+		WHERE o.order_no=#{orderNo}
+		<if test="orderSource!=null">
+			and o.order_source=#{orderSource}
+		</if>
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+	</select>
+	<!-- 查询订单vo列表 -->
+	<select id="getOrderVoList" resultMap="orderDetails">
+		SELECT
+		o.order_id,
+		o.order_no,
+		o.C_order_no,
+		o.total_tax,
+		o.total_price,
+		o.Ticket_REMARK,
+		o.recipt_way,o.create_date,
+		o.flight_no,o.Flight_date,
+		o.policy_type,o.c_add_date,
+		o.last_print_ticket_time,
+		p.passenger_id,
+		p.name,p.ticket_no,
+		p.dep_city_code,p.arr_city_code,
+		p.cabin,
+		p.print_ticket_date,p.print_Ticket_Cabin,p.print_ticket_by
+		FROM t_order o JOIN t_passenger p ON o.order_no=p.order_no
+		WHERE o.create_date BETWEEN #{startDate} and #{endDate}
+		<if test="orderSource!=null">
+			and o.order_source=#{orderSource}
+		</if>
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+	</select>
+
+	<!--添加订单处理人 -->
+	<update id="addProcess">
+		update t_order set process_by=#{process} where order_no=#{orderNo}
+	</update>
+	
+	<!--添加pnr -->
+	<update id="savePnr">
+		update t_order set pnr_txt=#{pnr} where order_no=#{orderNo}
+	</update>
+	<!--解锁 -->
+	<update id="deleteProcess">
+		update t_order set process_by=null where order_no=#{orderNo}
+	</update>
+	<!--是否被锁 -->
+	<select id="isHavePcocess" resultType="string">
+		select process_by from t_order where order_no=#{orderNo}
+	</select>
+
+	<!-- 删除订单 -->
+	<delete id="deleteOrder">
+		delete from t_order where order_no in
+		<foreach collection="array" open="(" close=")" separator=","
+			item="orderNo" index="i">
+			#{orderNo}
+		</foreach>
+	</delete>
+
+	<update id="updateStatus">
+		update t_order set status=#{status} where
+		order_no=#{orderNo}
+	</update>
+
+	<select id="isExist" resultType="string">
+		SELECT order_no FROM t_order
+		where order_source=#{orderSource} AND order_no=#{orderNo}
+	</select>
+
+	<select id="isExistcOrderNo" resultType="string">
+		SELECT order_no FROM
+		t_order where C_order_no=#{cOrderNo} AND order_source=#{orderSource}
+	</select>
+
+	<select id="getStatus" resultType="string">
+		SELECT status from t_order
+		WHERE order_no=#{orderNo}
+	</select>
+
+	<!--获取订单的所有乘机人 -->
+	<select id="getOrderPassenger" resultType="string">
+		SELECT p.name as name
+		FROM t_order o JOIN t_passenger p ON o.order_no=p.order_no
+		where o.order_no=#{orderNo}
+	</select>
+
+	<select id="getOrderNoList" resultType="string">
+		SELECT order_no FROM t_order o
+		WHERE order_source=#{orderSource} AND status=#{status}
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+	</select>
+
+	<select id="getcOrderNoList" resultType="string">
+		SELECT C_order_no FROM t_order o
+		WHERE order_source=#{orderSource} AND
+		status=#{status}
+		<if test="orderShop!=null">
+			and o.Order_shop=#{orderShop}
+		</if>
+	</select>
+
+	<!--账号锁定的待出票和出票中订单数量 -->
+	<select id="getLockCount" resultType="int">
+		SELECT COUNT(1) FROM
+		t_order WHERE process_by=#{name} AND status IN("2","1") AND c_add_date
+		BETWEEN #{startDate} AND #{endDate}
+	</select>
+
+
+	<select id="getB2BtciketCount" resultType="int">
+		SELECT Passenger_count FROM t_order 
+		WHERE status ="3" AND policy_type LIKE #{policyType} 
+		AND c_add_date BETWEEN #{startDate} AND #{endDate}
+	</select>
+
+	
+	<!-- 查询订单某账号锁单数量 -->
+	<select id="getAutoPrintLocks" resultType="int">
+		SELECT COUNT(1) FROM t_order o WHERE  o.create_date > #{minDate} AND o.process_by=#{name}  AND o.status=#{status}
+	</select>
+
+
+	<select id="getOurOrderNo" resultType="cn.ssq.ticket.system.entity.Order">
+		SELECT Out_order_no,dep_city_code,arr_city_code,Flight_date,flight_no,big_pnr,policy_type FROM t_order
+		where  order_no=#{orderNo}
+	</select>
+
+    <select id="getPnrByOrderNo" resultType="string">
+        SELECT pnr_txt from t_order
+        WHERE order_no=#{orderNo}
+    </select>
+
+    <update id="updateBigPnr">
+        update t_order set big_pnr=#{bigPnr} where
+        order_id=#{orderId}
+    </update>
+
+    <update id="updateOutOrderNo">
+        update t_order set Out_order_no=#{outOrderNo},status=#{status} where
+        order_id=#{orderId}
+    </update>
+
+
+
+</mapper>

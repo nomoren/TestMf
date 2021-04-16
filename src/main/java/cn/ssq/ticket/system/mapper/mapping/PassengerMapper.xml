@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.PassengreMapper">
+
+	<resultMap type="cn.ssq.ticket.system.entity.Passenger" id="passengerMap">
+		<id column="passenger_id" property="passengerId"/>
+		<result column="name" property="name"/>
+		<result column="cert_no" property="certNo"/>
+		<result column="pnr" property="pnr"/>
+		<result column="ticket_no" property="ticketNo"/>
+		<result column="ACTUAL_PRICE" property="actualPrice"/>
+		<result column="PURCH_PALSE" property="purchPalse"/>
+		<result column="order_id" property="orderId"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="order_source" property="orderSource"/>
+		<result column="Order_shop" property="orderShop"/>
+		<result column="airline_code" property="airlineCode"/>
+		<result column="flight_no" property="flightNo"/>
+		<result column="dep_city_code" property="depCityCode"/>
+		<result column="arr_city_code" property="arrCityCode"/>
+		<result column="Flight_dep_date" property="flightDepDate"/>
+		<result column="print_Ticket_Cabin" property="printTicketCabin"/>
+		<association property="refund" javaType="cn.ssq.ticket.system.entity.Refund">
+			<id column="refund_id" property="refundId"/>
+			<result column="C_REM_STATE" property="cRemState"/>
+			<result column="RET_NO" property="retNo"/>
+			<result column="C_REM_DATE" property="cRemDate"/>
+			<result column="C_REAL_PRICE" property="cRealPrice"/>
+			<result column="AIR_REM_STATE" property="airRemState"/>
+			<result column="AIR_APP_DATE" property="airAppDate"/>
+			<result column="AIR_REM_DATE" property="airRemDate"/>
+			<result column="AIR_ESTIMATE_PRICE" property="airEstimatePrice"/>
+			<result column="AIR_REAL_PRICE" property="airRealPrice"/>
+			<result column="REMARK" property="remark"/>
+            <result column="XEPNR_STATUS" property="xePnrStatus"/>
+            <result column="Refund_type" property="refundType"/>
+		</association>
+	</resultMap>
+	<!--查询订单所有乘客  -->
+	<select id="getByOrderNo" resultMap="passengerMap">
+		SELECT 
+		p.passenger_id,p.name,p.cert_no,p.pnr,p.ticket_no,p.ACTUAL_PRICE,p.PURCH_PALSE,
+		p.order_id,p.order_no,p.order_source,p.Order_shop,p.airline_code,
+		p.flight_no,p.dep_city_code,p.arr_city_code,p.Flight_dep_date,p.print_Ticket_Cabin,
+		t.C_REM_STATE,t.RET_NO,t.C_REM_DATE,t.C_REAL_PRICE,
+		t.refund_id,t.AIR_REM_STATE,t.AIR_APP_DATE,t.AIR_REM_DATE,
+		t.AIR_ESTIMATE_PRICE,t.AIR_REAL_PRICE,t.REMARK,t.XEPNR_STATUS,t.Refund_type
+		FROM t_passenger p LEFT JOIN t_refund t ON p.passenger_id=t.passenger_id 
+		WHERE p.order_no=#{orderNo}
+	</select>
+	<update id="updateIsImRet">
+		UPDATE t_passenger SET IS_IM_RET=#{cStatus},IS_AIR_RET=#{aStatus} WHERE passenger_id=#{passengerId}
+	</update>
+	<!--查询订单所有退票乘客  -->
+	<select id="getByRetNo" resultMap="passengerMap">
+		SELECT 
+		p.passenger_id,p.name,p.cert_no,p.pnr,p.ticket_no,p.ACTUAL_PRICE,p.PURCH_PALSE,
+		p.order_id,p.order_no,p.order_source,p.Order_shop,p.airline_co,
+		p.flight_no,p.dep_city_code,p.arr_city_code,p.Flight_dep_date,p.print_Ticket_Cabin,
+		t.C_REM_STATE,t.RET_NO,t.C_REM_DATE,t.C_REAL_PRICE,
+		t.refund_id,t.AIR_REM_STATE,t.AIR_APP_DATE,t.AIR_REM_DATE,
+		t.AIR_ESTIMATE_PRICE,t.AIR_REAL_PRICE,t.REMARK 
+		FROM t_passenger p LEFT JOIN t_refund t ON p.passenger_id=t.passenger_id 
+		WHERE t.RET_NO=#{retNo}
+	</select>
+	
+	
+	<select id="getRemark" resultType="string">
+	SELECT remarks FROM t_passenger  WHERE create_date BETWEEN "2019-01-01 00:00:00" AND "2019-12-31 23:59:59" AND PURCH_PALSE LIKE "%深航%" AND LENGTH(remarks) > 17 AND remarks LIKE "1%"	
+	
+</select>
+	
+	
+	<!--跟新票号 -->
+	<!-- <update id="updateTicketNo">
+		UPDATE t_passenger SET ticket_no=#{ticketNo},print_ticket_date=#{date} WHERE cert_no=#{certNo}
+	</update> -->
+	
+	
+</mapper>

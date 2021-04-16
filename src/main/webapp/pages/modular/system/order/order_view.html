@@ -1,0 +1,363 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/order/order_view.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="x-body" style="background-color: white;">
+	<div class="layui-collapse" style="margin-top: 5px;">
+		<!-- 订单信息 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">订单信息</h2>
+			<input type="hidden" id="orderNo" value="${data.orderNo!}" />
+			<div class="layui-colla-content layui-show">
+				<div style="width: 100%">
+					<div style="border-right: 1px solid #C0C0C0;float: left;width: 70%">
+						<table class="layui-table" lay-size="sm" lay-skin="nob">
+							<colgroup>
+								<col width="10%">
+								<col width="40%">
+								<col width="10%">
+								<col width="40%">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td><b>订单号：</b></td>
+									<td id="orderNoText"><b>${data.orderNo!}</b></td>
+									<td><b>订单来源：</b></td>
+									<td id="orderSourceText"><b>${data.orderSource!}</b></td>
+								</tr>
+								<tr>
+									<td><b>成人PNR：</b></td>
+									<td id="pnrText"><b>${data.pnr!}</b></td>
+									<td><b>政策代码：</b></td>
+									<td id="policyIdText"><b>${data.policyType!}</b></td>
+								</tr>
+								<tr>
+									<td><b>进单/产品类型： </b></td>
+									<td><b>${data.ticType!"-"}</b></td>
+									<td><b>政策类型： </b></td>
+									<td><b>${data.policyTypeDes!"-"}</b></td>				
+								</tr>
+								<tr>
+									<td><b>政策备注： </b></td>
+									<td style="color: #f60;"><b>${data.policyRemark!"-"}</b></td>
+									<td><b>最晚出票/提示： </b></td>
+									<td style="color: #f60;"><b>${data.lastPrintTicketTime!"-"}</b></td>				
+								</tr>
+								<tr id="orderRemark" style="display: none;">
+									<td><b>出票备注: </b></td>
+									<td style="color: #f60;"><b id="orderRemarkText"></b></td>
+									<td><b>行程单：</b></td>
+									<td><b>${data.traStatus!"-"}</b></td>	
+								</tr>
+								<tr id="policyLinkT" style="display: none;">
+									<td><b>匹配政策：</b></td>
+									<td style="color: #f60;"><button id="policyLink" href="" class="layui-btn layui-btn-primary layui-btn-sm"></button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="border: 0px solid red;float: left;width: 20%;">
+						<div style="border: 0px solid red;text-align: center;padding-top: 65px;padding-left: 40px;">
+							<h1 style="font-weight: bold;font-size: 30px;color: #f60;" id="orderStatusText">${data.status!}</h1>
+						</div>
+					</div>
+				</div>
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="15%">
+						<col width="15%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>航程类型</th>
+							<th>报价类型</th>
+							<th>产品类型</th>
+							<th>航班号</th>
+							<th>舱位</th>
+							<th>起降机场</th>
+							<th>起降时间</th>
+							<th>航班信息</th>
+						</tr>
+					</thead>
+					<tbody id="flightInfo">
+						@for(flight in data.flightList){
+						<tr>
+							@if(flightLP.index==1){
+								<td rowspan="2">${data.tripType!}</td>
+							@}
+							<td>特惠</td>
+							<td>预付产品</td>
+							<td>${flight.flightNo!}</td>
+							<td>${flight.cabin!}</td>
+							<td>${flight.depCityCode!} - ${flight.arrCityCode!}</td>
+							<td>${flight.depTimes!} - ${flight.arrTimes!}</td>
+							<td>
+								<a href="javacript:void(0);" style="color: blue;" id="orderxq">详情</a>
+							</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+				<!--<form class="layui-form" action="" id="passengerList">-->
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>旅客类型</th>
+							<th>人数</th>
+							<th>票面</th>
+							<th>机建/燃油</th>
+							<th>航意险/份</th>
+							<th>延误险/份</th>
+							<th>机票</th>
+							<th>快递</th>
+							<th>行程单已退差额</th>
+							<th>CPC上调</th>
+							<th>用户支付总价</th>
+						</tr>
+					</thead>
+					<tbody id="orderInfo">
+						@var adult=0;   var adultTax=0;   var adultTicketPrice=0; var adultActualPrice=0;
+						@var childen=0; var childenTax=0; var childenTicketPrice=0; var childenActualPrice=0;
+						@var baby=0;    var babyTax=0;    var babyTicketPrice=0; var babyActualPrice=0;
+						@for(passenger in data.passengetList){ 
+							@if(passenger.passengerType=='成人'){
+								@adult++;
+								@if(adultTax==0){
+									@adultTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@adultTicketPrice=passenger.ticketPrice;
+									@adultActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='儿童'){
+								@childen++;
+								@if(childenTax==0){
+									@childenTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@childenTicketPrice=passenger.ticketPrice;
+									@childenActualPrice=passenger.actualPrice;
+								@}
+							@}else if(passenger.passengerType=='婴儿'){
+								@baby++;
+								@if(babyTax==0){
+									@babyTax=parseInt(passenger.tax)+parseInt(passenger.fee);
+									@babyTicketPrice=passenger.ticketPrice;
+									@varbabyActualPrice=passenger.actualPrice;
+								@}
+							@}
+						@}
+						@if(adult!=0){
+							<tr>
+								<td>成人</td>
+								<td>${adult}</td>
+								<td>¥${adultTicketPrice}</td>
+								<td>¥${adultTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${adultActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td rowspan="3">¥${data.totalPrice!}</td>
+							</tr>
+						@}
+						@if(childen!=0){
+							<tr>
+								<td>儿童</td>
+								<td>${childen}</td>
+								<td>¥${childenTicketPrice}</td>
+								<td>¥${childenTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${childenActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								@if(adult==0){
+									<td rowspan="3">¥${data.totalPrice!}</td>
+								@}
+							</tr>
+						@}
+						@if(baby!=0){
+							<tr>
+								<td>婴儿</td>
+								<td>${baby}</td>
+								<td>¥${babyTicketPrice}</td>
+								<td>¥${babyTax}</td>
+								<td>¥0(0份)</td>
+								<td>¥0(0份)</td>
+								<td>¥${babyActualPrice}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						@}
+					</tbody>
+				</table>
+
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="5%">
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="5%">
+						<col width="6%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>类型</th>
+							<th>乘机人姓名</th>
+							<th>证件类型</th>
+							<th>证件号</th>
+							<th>舱位</th>
+							<th>PNR</th>
+							<th>票号</th>
+						</tr>
+					</thead>
+					<tbody id="passengerInfo">
+						@for(passenger in data.passengetList){
+						<tr>
+							<th>${passengerLP.index}</th>
+							<th>${passenger.passengerType}</th>
+							<th>${passenger.name!}</th>
+							<th>${passenger.certType!}</th>
+							<th>${passenger.certNo!}</th>
+							<th>${passenger.cabin!}</th>
+							<th>${passenger.pnr!}</th>
+							<th>${passenger.ticketNo!}</th>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- 共享信息 -->
+		<div class="layui-colla-item" style="display: none;">
+			<h2 class="layui-colla-title">共享信息</h2>
+			<div class="layui-colla-content layui-show">
+
+			</div>
+		</div>
+
+		<!-- 销售规则 -->
+		<div class="layui-colla-item" style="display: none;">
+			<h2 class="layui-colla-title">销售规则</h2>
+			<div class="layui-colla-content layui-show">
+
+			</div>
+		</div>
+
+		<!-- 航班状态 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">航班状态</h2>
+			<div class="layui-colla-content layui-show">
+				<table class="layui-table" lay-size="sm" lay-skin="nob">
+					<colgroup>
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col width="10%">
+						<col width="20%">
+						<col>
+					</colgroup>
+					<tbody>
+						@for(flight in data.flightList){
+						<tr>
+							<td>航班号：</td>
+							<td>${flight.flightNo!}</td>
+						</tr>
+						<tr>
+							<td>计划起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>预计起飞时间：</td>
+							<td>${flight.depTimes!}</td>
+							<td>实际起飞时间：</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>计划到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>预计到达时间：</td>
+							<td>${flight.arrTimes!}</td>
+							<td>实际到达时间：</td>
+							<td>无</td>
+						</tr>
+						@}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<!--采购信息-->
+		<div class="layui-colla-item" style="display: none;" id="purchInfo">
+			<h2 class="layui-colla-title">采购信息</h2>
+			<div class="layui-colla-content layui-show">
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>交易流水号</th>
+							<th>出票地</th>
+							<th>采购价格</th>
+							<th>支付方式</th>
+							<th>备注</th>
+							<th>乘客</th>
+							<th>类型</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="purchList">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<!--操作日志-->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">操作日志</h2>
+			<div class="layui-colla-content layui-show" lay-filter="log">
+				<table class="layui-table" id="logTable" lay-filter="logTable"></table>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	body{
+		font-family: "Microsoft YaHei";
+	}
+</style>
+@}

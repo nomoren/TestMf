@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var Feng = {
+				ctxPath: "",
+				addCtx: function(ctx) {
+					if(this.ctxPath === "") {
+						this.ctxPath = ctx;
+					}
+				}
+			};
+			Feng.addCtx("${ctxPath}");
+		</script>
+		<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css" />
+		<link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css" media="all" />
+		<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+		<script type="text/javascript" src="${ctxPath}/assets/common/js/common.js"></script>
+	</head>
+
+	<body>
+		<div style="margin-top: 20px;">
+			<form class="layui-form" id="flightChangeForm">
+				<fieldset class="layui-elem-field">
+					<legend>原航班信息</legend>
+					<div class="layui-field-box">
+						<div class="layui-inline">
+								<label class="layui-form-label">订单号</label>
+								<div class="layui-input-inline">
+									<input type="text" name="orderNo" required lay-verify="required" placeholder="请输入订单号" value="${flight.orderNo!}" autocomplete="off" class="layui-input">
+								</div>
+						</div>	
+						<div class="layui-inline">
+							<label class="layui-form-label">航变类型</label>
+							<div class="layui-input-block">
+								<select name="changeType" lay-verify="required" id="changeType">
+									<option value="1">航班变更</option>
+									<option value="2">航班取消(有保护航班)</option>
+									<option value="3">航班取消(无保护航班)</option>
+								</select>
+							</div>
+						</div>
+						<br />
+						<br />
+						<div class="layui-inline">
+							<label class="layui-form-label">航班号</label>
+							<div class="layui-input-inline">
+								<input type="text" name="orgFlightNo" required lay-verify="required" autocomplete="off" class="layui-input" value="${flight.flightNo!}">
+								<input type="hidden" name="orderSource" value="${flight.orderSource!}" />
+								<input type="hidden" name="orderShop" value="${flight.orderShop!}" />
+								<input type="hidden" name="flightId" value="${flight.flightId!}" />
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">起飞</label>
+							<div class="layui-input-inline">
+								<input type="text" name="orgStartPort" required lay-verify="required" autocomplete="off" class="layui-input" value="${flight.depCityCode!}">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">到达</label>
+							<div class="layui-input-inline">
+								<input type="text" name="orgEndPort" required lay-verify="required" autocomplete="off" class="layui-input" value="${flight.arrCityCode!}">
+							</div>
+						</div>
+						<br />
+						<br />
+						<div class="layui-inline">
+							<label class="layui-form-label">出发日期</label>
+							<div class="layui-input-inline">
+								<input type="text" id="orgDepTime" name="orgDepTime" required lay-verify="required" autocomplete="off" class="layui-input" value="${flight.depTimes!}">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">到达日期</label>
+							<div class="layui-input-inline">
+								<input type="text" name="orgArrTime" id="orgArrTime" required lay-verify="required" autocomplete="off" class="layui-input" value="${flight.arrTimes!}">
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset class="layui-elem-field" style="margin-top: 20px;">
+					<legend>新航班信息</legend>
+					<div class="layui-inline">
+						<label class="layui-form-label">航班号</label>
+						<div class="layui-input-inline">
+							<input type="text" name="newFlightNo" autocomplete="off" class="layui-input" value="${flight.newFlightNo!}"> 
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">起飞</label>
+						<div class="layui-input-inline">
+							<input type="text" name="newStartPort" autocomplete="off" class="layui-input" placeholder="出发机场三字码" value="${flight.newDepCode!}">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">到达</label>
+						<div class="layui-input-inline">
+							<input type="text" name="newEndPort" autocomplete="off" class="layui-input" placeholder="到达机场三字码" value="${flight.newArrCode!}">
+						</div>
+					</div>
+					<br />
+					<br />
+					<div class="layui-inline">
+						<label class="layui-form-label">出发日期</label>
+						<div class="layui-input-inline">
+							<input type="text" id="newDepTime" name="newDepTime" autocomplete="off" class="layui-input" value="${flight.newDepDate!}">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">到达日期</label>
+						<div class="layui-input-inline">
+							<input type="text" name="newArrTime" id="newArrTime" autocomplete="off" class="layui-input" value="${flight.newArrDate!}">
+						</div>
+					</div>
+					<br />
+					<br />
+				</fieldset>
+
+			</form>
+
+		</div>
+
+		<div style="text-align: center;">
+			<div class="layui-input-block">
+				<button class="layui-btn" id="subChange">立即提交</button>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		layui.use(['layer', 'form', 'table', 'admin', 'ax', 'laydate', 'element'], function() {
+			var layer = layui.layer;
+			var form = layui.form;
+			var laydate = layui.laydate;
+			var element = layui.element;
+			laydate.render({
+				elem: '#orgDepTime',
+				type: 'datetime',
+				trigger: 'click'
+			});
+			laydate.render({
+				elem: '#orgArrTime',
+				type: 'datetime',
+				trigger: 'click'
+			});
+			laydate.render({
+				elem: '#newDepTime',
+				type: 'datetime',
+				trigger: 'click'
+			});
+			laydate.render({
+				elem: '#newArrTime',
+				type: 'datetime',
+				trigger: 'click'
+			});
+
+		});
+
+	});
+	//航变提交
+	$("#subChange").click(function() {
+		var info = $("#flightChangeForm").serializeObject();
+		var result = JSON.stringify(info);
+		var url = Feng.ctxPath + '/flightChange/subFlightChange';
+		$.ajax({
+			"url": url,
+			"type": "POST",
+			"data": result,
+			"dataType": "JSON",
+			"contentType": "application/json",
+			"success": function(json) {
+				if(json.code == -1) {
+					layer.msg(json.msg, {
+						icon: 5,
+						time: 2000
+					});
+				} else {
+					layer.msg(json.msg, {
+						icon: 6,
+						time: 2000
+					});
+				}
+			}
+		});
+	});
+	var changeCode=${flight.changeCode};
+	if(changeCode!="99"){
+		$("#changeType  option[value='"+changeCode+"'] ").attr("selected",true)
+	}
+	
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if(o[this.name]) {
+				if(!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+</script>

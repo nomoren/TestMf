@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css" />
+		<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+		<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<title></title>
+	</head>
+	<body style="background-color: white;">
+		<div id="order" style="margin-left:10px;margin-right:10px;">
+			<table class="layui-table">
+				<colgroup>
+					<col width="150">
+					<col width="150">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>订单号：<span id="orderNo">${data.orderNo}</span></th>
+						<th>订单状态：
+							@if(data.status=='1'){
+						 	 	<span>待出票</span>
+						 	@}else if(data.status=='2'){
+						 		<span>出票中</span>
+							@}else if(data.status=='3'){
+						 		<span>已出票</span>
+						 	@}else if(data.status=='4'){
+						 		<span>已取消</span>
+						 	@}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>政策代码：${data.policyId}</td>
+						<td>订单金额：￥${data.totalPrice}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="flight" style="margin-left:10px;margin-right:10px;">
+			<table class="layui-table">
+				<colgroup>
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+					<col width="150">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>航空公司：</th>
+						<th>航班号：</th>
+						<th>舱位：</th>
+						<th>机型：</th>
+						<th>航班时间：</th>
+						<th>起降机场：</th>
+						<th>里程：</th>
+						<th>飞行时间：</th>
+						<th>经停：</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(flight in flightList){
+						<tr>
+							<td>${flight.airlineCode}</td>
+							<td>${flight.flightNo}</td>
+							<td>${flight.cabin}</td>
+							<td>${flight.flightType}</td>
+							<td>${flight.flightDepDate}</td>
+							<td>${flight.depCityCode} - ${flight.arrCityCode}</td>
+							<td>*</td>
+							<td>*</td>
+							<td>*</td>
+						</tr>
+					@}
+				</tbody>
+			</table>
+		</div>
+		<div id='passengerList' style='margin-left:10px;margin-right:10px;border:0.5px solid #000;padding:0.5px;'>
+		
+		</div>
+		<div style="text-align: center;">
+			<button type="button" id="saveChange" class="layui-btn layui-btn-normal" style="margin-top: 10px;margin-bottom: 10px;">保改签单</button>
+		</div>
+	</body>
+	<script>
+		var Feng = {
+	        ctxPath: "",
+	        addCtx: function (ctx) {
+	            if (this.ctxPath === "") {
+	                this.ctxPath = ctx;
+	            }
+	        }
+	   	 };
+	   	 Feng.addCtx("${ctxPath}");
+	</script>
+	<script src="${ctxPath}/assets/modular/system/change/change_add.js"></script>
+</html>

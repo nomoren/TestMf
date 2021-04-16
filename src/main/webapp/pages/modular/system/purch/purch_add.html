@@ -1,0 +1,260 @@
+<link rel="stylesheet" href="${ctxPath}/assets/common/layui/css/layui.css" />
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<script type="text/javascript" src="${ctxPath}/assets/common/layui/layui.js"></script>
+<div class="x-body">
+	<div class="layui-collapse" style="margin-top: 5px;">
+		<!-- 订单信息 -->
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">订单信息</h2>
+			<div class="layui-colla-content layui-show">
+				<div style="width: 100%">
+					<div style="border-right: 1px solid #C0C0C0;float: left;width: 70%">
+						<table class="layui-table" lay-size="sm" lay-skin="nob">
+							<colgroup>
+								<col width="10%">
+								<col width="40%">
+								<col width="10%">
+								<col width="40%">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<td><b>订单号：</b></td>
+									<td id="orderNoText"><b>${data.orderNo!}</b></td>
+									<td><b>订单来源：</b></td>
+									<td id="orderSourceText"><b>${data.orderSource!}</b></td>
+								</tr>
+								<tr>
+									<td><b>成人PNR：</b></td>
+									<td id="pnrText"><b>${data.pnr!}</b></td>
+									<td><b>政策代码：</b></td>
+									<td id="policyIdText"><b>${data.policyType!}</b></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="border: 0px solid red;float: left;width: 20%;">
+						<div style="border: 0px solid red;text-align: center;padding-top: 30px;padding-left: 40px;">
+							<h1 style="font-weight: bold;font-size: 24px;color: #f60;" id="orderStatusText">--</h1>
+						</div>
+					</div>
+				</div>
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="15%">
+						<col width="15%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>航程类型</th>
+							<th>报价类型</th>
+							<th>产品类型</th>
+							<th>航班号</th>
+							<th>舱位</th>
+							<th>起降机场</th>
+							<th>起降时间</th>
+							<th>航班信息</th>
+						</tr>
+					</thead>
+					<tbody id="flightInfo">
+
+					</tbody>
+				</table>
+				<!--<form class="layui-form" action="" id="passengerList">-->
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="10%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>旅客类型</th>
+							<th>人数</th>
+							<th>票面</th>
+							<th>机建/燃油</th>
+							<th>航意险/份</th>
+							<th>延误险/份</th>
+							<th>机票</th>
+							<th>快递</th>
+							<th>行程单已退差额</th>
+							<th>CPC上调</th>
+							<th style='font-weight: bold;'>用户支付总价</th>
+						</tr>
+					</thead>
+					<tbody id="orderInfo">
+
+					</tbody>
+				</table>
+
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="5%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>类型</th>
+							<th>乘机人姓名</th>
+							<th>证件类型</th>
+							<th>证件号</th>
+							<th>票号</th>
+						</tr>
+					</thead>
+					<tbody id="passengerInfo">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">采购信息</h2>
+			<div class="layui-colla-content layui-show">
+				<form class="layui-form" action="" id="purch">
+					<table class="layui-table" lay-size="sm">
+						<colgroup>
+							<col width="10%">
+							<col width="6%">
+							<col width="6%">
+							<col width="6%">
+							<col width="15%">
+							<col width="6%">
+							<col width="6%">
+							<col width="6%">
+							<col width="8%">
+							<col width="6%">
+							<col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>交易流水号</th>
+								<th>出票地</th>
+								<th>采购价格</th>
+								<th>支付方式</th>
+								<th>备注</th>
+								<th>乘客</th>
+								<th>类型</th>
+								<th>差错退款</th>
+								<th>退款日期</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="purchList">
+						</tbody>
+							<tr id="purchFormInfo">
+								<th>
+									<input type="text" name="tradeNo" id="tradeNo" placeholder="输入交易流水号"   autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									<select lay-filter="trip" name="supplier" lay-verify="required" id="supplier">
+										<option value="0">请选择出票地</option>
+										<option value="1" selected="selected">官网</option>
+										<option value="17">鹏朋</option>
+										<option value="18">B2B</option>
+										<option value="15">蜗牛反采</option>
+										<option value="21">商旅</option>
+										<option value="16">携程反采</option>
+										<option value="19">反采3600</option>
+										<option value="13">BSP</option>
+										<option value="20">同程反采</option>
+										<option value="8">去哪反采</option>
+										<option value="9">淘宝反采</option>
+										<option value="2">517NA</option>
+										<option value="3">百拓</option>
+										<option value="4">19E</option>
+										<option value="5">客服</option>
+										<option value="6">中航易购</option>
+										<option value="7">天地行</option>
+										<option value="10">八千翼</option>
+										<option value="11">票盟</option>
+										<option value="12">51BOOK</option>
+										<option value="14">美团</option>
+										<option value="99">其他</option>
+									</select>
+								</th>
+								<th>
+									<input type="number" name="payAmount" placeholder="请输入采购价格" required lay-verify="required" value="" autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									<select lay-filter="trip" name="payWay" lay-verify="required" id="payWay">
+										<option value="0">请选择支付方式</option>
+										<option value="18">罗137支付宝</option>
+										<option value="13" selected="selected">易宝支付</option>
+										<option value="26">汇付</option>
+										<option value="11">凤凰卡</option>
+										<option value="28">ssq777支付宝</option>
+										<option value="24">ssqly支付宝</option>
+										<option value="27">罗3196</option>
+										<option value="22">632支付宝</option>
+										<option value="19">3600钱包支付</option>
+										<option value="21">BSP</option>
+										<option value="25">南航钱包支付</option>		
+										<option value="23">付时威支付宝</option>
+										<option value="17">支付宝</option>
+										<option value="20">罗建设银行</option>
+										<option value="99">其他</option>
+									</select>
+								</th>
+								<th>
+									<input type="text" name="remark" placeholder="备注"  value="" autocomplete="off" class="layui-input">
+								</th>
+								<th id="passengerNames"></th>
+								<th>
+									<select lay-filter="trip" name="type" lay-verify="required" id="purchType">
+										<option value="0" selected="selected">正常报表</option>
+										<option value="1">差错报表</option>
+									</select>
+								</th>
+								<th>
+									<input type="number" name="returnMoney" id="returnMoney" placeholder="差错退款金额"  value="" autocomplete="off" class="layui-input">
+								</th>
+								<th>
+									<input type="text" id="returnDate" name="returnDate" placeholder="差错报表退款日期"  class="layui-input">
+								</th>
+								<th id="save">
+									<input type="hidden" id="orderNo" name="orderNo" />
+									<input type="hidden" id="orderId" name="orderId" />
+									<input type="hidden" id="passengerId" name="passengerId" />
+									<button class="layui-btn" id="purchForm" lay-submit lay-filter="purchForm">保存</button>
+								</th>
+							</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		var Feng = {
+			ctxPath: "",
+			addCtx: function(ctx) {
+				if(this.ctxPath === "") {
+					this.ctxPath = ctx;
+				}
+			}
+		};
+		Feng.addCtx("${ctxPath}");
+	</script>
+	<script src="${ctxPath}/assets/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${ctxPath}/assets/modular/system/purch/purch_add.js"></script>

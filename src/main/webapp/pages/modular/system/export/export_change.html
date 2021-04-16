@@ -1,0 +1,19 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/export/export_change.js"]}){
+	<form class="layui-form" action="" id="printTicket" style="margin-top: 20px;">
+		<div class="layui-inline">
+			<label class="layui-form-label">出票开始</label>
+			<div class="layui-input-inline">
+				<input type="text" id="startDate" name="startDate" required lay-verify="required" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">出票结束</label>
+			<div class="layui-input-inline">
+				<input type="text" id="endDate" name="endDate" required lay-verify="required" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<br />
+		<button class="layui-btn" id="exportPrintTicket" lay-submit lay-filter="exportPrintTicket" style="margin-left: 110px;margin-top: 10px;">导出报表</button>
+	</form>
+
+@}

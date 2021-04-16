@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="ok">
+	<order id="1598519860000" orderNo="5223611915964" allPrice="1184.0"
+		noPay="0" source="bigorder_yj" jlxSource="jlx派单" checkedBaggageRule="20KG"
+		backnote="去程以航空公司最新规定为准" xcdPrice="0" viewPrice="1170.0" price="1134.0"
+		policyFid="XLY20082323432602VH00" policyCode="YZHSHEB2B-E" cabinNote="YZHSHEB2B-E 沈阳B2B 0.035"
+		policyPriceType="10" insuranceUnitPrice="0" insuranceCount="0" pnr="JF0ETS"
+		ticketDeadLine="2020-08-27 19:21:14" cpnr="" childPrice="0.0"
+		childFuelTax="0.0" infantPrice="0.0" constructionFee="50.0" fuelTax="0.0"
+		status="PAY_OK" contact="" contactMob="18008445568" createTime="2020-08-27 17:17:40"
+		needPS="false">
+		<flight code="ZH9370" cabin="V" cabinName="经济舱" dep="SHE" arr="WUH"
+			depDay="2020-08-30" depTime="09:05" arrTime="11:55" realCode="" />
+		<passenger name="何文强" birthday="1988-10-25" ageType="0"
+			gender="男" cardType="NI" price="1134.0" cardNum="231121198810254916"
+			contactMob="" eticketNum=""></passenger>
+		<log operator="System" time="2020-08-27 17:18:32" action="生成订单 操作人: System" />
+		<log operator="system" time="2020-08-27 17:20:31" action="开始进行支付前校验 操作人: system" />
+		<log operator="system" time="2020-08-27 17:20:38"
+			action="PATA校验通过,销售价：1134,票面价：1170,pata价格：1170 操作人: system" />
+		<log operator="system" time="2020-08-27 17:20:38" action="支付前校验结果:true 操作人: system" />
+		<log operator="System" time="2020-08-27 17:21:15" action="订单状态由订座成功等待支付变为支付成功等待出票 操作人: System" />
+		<log operator="system" time="2020-08-27 17:21:23" action="搭桥OFFICE:成功CAN421 操作人: system" />
+		<log operator="System" time="2020-08-27 17:21:25" action="订单状态由支付成功等待出票变为支付成功等待出票 操作人: System" />
+	</order>
+</result>

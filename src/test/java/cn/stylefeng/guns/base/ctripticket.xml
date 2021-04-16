@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request UserName="东莞上上千AFD" UserPassword="d2e5c5d0ea7bc6b51acaa24ef2ce6625">
+	<OpenModifyOrderRequest>
+		<BookingChannel />
+		<IssueBillID>535284777</IssueBillID>
+		<PNRLists>
+			<PNRList>
+				<PNR>JMTD5Z</PNR>
+				<PNRResultStatus>1</PNRResultStatus>
+				<Sequence>1</Sequence>
+				<FlightNo>ZH9385</FlightNo>
+				<DPort>NNG</DPort>
+				<APort>NKG</APort>
+				<TicketLists>
+					<TicketList>
+						<PassengerName>潘孝品</PassengerName>
+						<AirLineCode>479</AirLineCode>
+						<TicketNo>2183945138</TicketNo>
+						<TicketResultStatus>1</TicketResultStatus>
+					</TicketList>
+				</TicketLists>
+			</PNRList>
+		</PNRLists>
+	</OpenModifyOrderRequest>
+</Request>

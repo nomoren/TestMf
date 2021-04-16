@@ -1,0 +1,20 @@
+@layout("/common/_container.html",{js:["/assets/modular/system/refund/refundImport.js"]}){
+<link rel="stylesheet" href="${ctxPath}/assets/common/css/style.css" />
+<div class="layui-body-header">
+	<span class="layui-body-header-title">导入任务</span>
+</div>
+
+<div class="layui-fluid">
+	<button type="button" class="layui-btn" id="uploadOrderReport">
+  		<i class="layui-icon">&#xe67c;</i>鹏鹏待退订单导入
+	</button>
+	&nbsp;
+	<button type="button" class="layui-btn" id="uploadOrderReportB2B">
+  		<i class="layui-icon">&#xe67c;</i>B2B待退订单导入
+	</button>
+	<br />
+	<span  style="color: #FF0000;">只能导自愿退票类型 , 多个票号之间用 "," 分割 , 必填蜜蜂订单号和乘客票号</span>
+	
+	<table class="layui-table" id="importTable" lay-filter="importTable"></table>
+</div>
+@}

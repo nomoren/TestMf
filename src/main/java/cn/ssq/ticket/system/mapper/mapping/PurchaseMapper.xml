@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssq.ticket.system.mapper.PurchaseMapper">
+
+	<select id="getPassengerNames" resultType="string">
+		SELECT passenger_names FROM t_purchase WHERE order_no=#{orderNo} and flag!=1
+	</select>
+	
+	 <resultMap id="purchData" type="cn.ssq.ticket.system.entity.Purchase">
+        <id column="purchase_id" property="purchaseId"/>
+        <result column="print_ticket_date" property="printTicketDate"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="passenger_names" property="passengerNames"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="customer_amount" property="customerAmount"/>
+        <result column="profit" property="profit"/>
+        <result column="supplier" property="supplier"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="c_add_date" property="cAddDate"/>
+        <result column="employee_name" property="employeeName"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="purchase_no" property="purchaseNo"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="real_pay" property="realPay"/>
+         <result column="type" property="type"/>
+        <result column="remark" property="remark"/>
+        <collection property="passengerList" ofType="cn.ssq.ticket.system.entity.Passenger">
+			<id column="passenger_id" property="passengerId"/>
+			<result column="flight_no" property="flightNo"/>
+			<result column="cabin" property="cabin"/>
+			<result column="dep_city_code" property="depCityCode"/>
+			<result column="arr_city_code" property="arrCityCode"/>
+			<result column="print_Ticket_Cabin" property="printTicketCabin"/>
+			<result column="sell_price" property="sellPrice"/>
+			<result column="Flight_dep_date" property="flightDepDate"/>
+			<result column="dep_time" property="depTime"/>
+			<result column="ACTUAL_PRICE" property="actualPrice"/>
+			<result column="ticket_no" property="ticketNo"/>
+			<result column="POLICY_TYPE" property="policyType"/>
+			<result column="cert_no" property="certNo"/>
+			<result column="remarks" property="remarks"/>
+			<result column="airline_code" property="airlineCode"/>
+			<result column="name" property="name"/>
+			<result column="create_date" property="createDate"/>
+			<result column="purch_order_no" property="purchOrderNo"/>
+		</collection>
+    </resultMap>
+	<!--获取导出财务报表所需数据  -->
+	<select id="getPurchData" resultMap="purchData">
+		SELECT
+			p.purchase_id,
+			p.print_ticket_date,p.order_no,
+			p.passenger_names,p.pay_amount,
+			p.customer_amount,p.profit,
+			p.supplier,p.pay_way,p.real_pay,
+			p.employee_name,p.remark,
+			p.c_add_date,p.flight_date,
+			p.purchase_no,
+			p.trade_no,p.type,
+			a.passenger_id,
+			a.cert_no,a.remarks,
+			a.flight_no,a.cabin,
+			a.airline_code,a.name,
+			a.dep_city_code,a.arr_city_code,
+			a.print_Ticket_Cabin,a.ACTUAL_PRICE,
+			a.sell_price,a.Flight_dep_date,
+			a.dep_time,
+			a.ticket_no,a.POLICY_TYPE,
+			a.create_date,a.purch_order_no 
+		FROM
+			t_purchase p
+		JOIN t_passenger a
+		ON p.order_no = a.order_no 
+			WHERE p.print_ticket_date BETWEEN #{startDate} AND #{endDate} AND p.flag!=1 
+			<if test="orderSorce!=null">
+				AND a.order_source=#{orderSorce}
+			</if>
+			<if test="orderShop!=null">
+				AND a.order_shop=#{orderShop}
+			</if>
+	</select>
+	
+	
+	<resultMap id="purchDataByState" type="cn.ssq.ticket.system.entity.Purchase">
+        <id column="purchase_id" property="purchaseId"/>
+        <result column="print_ticket_date" property="printTicketDate"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="order_source" property="orderSource"/>
+        <result column="passenger_names" property="passengerNames"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="customer_amount" property="customerAmount"/>
+        <result column="profit" property="profit"/>
+        <result column="supplier" property="supplier"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="c_add_date" property="cAddDate"/>
+        <result column="employee_name" property="employeeName"/>
+        <result column="flight_date" property="flightDate"/>
+        <result column="purchase_no" property="purchaseNo"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="real_pay" property="realPay"/>
+        <result column="type" property="type"/>
+        <result column="remark" property="remark"/>
+        <result column="new_ticket_no" property="newTicketNo"/>
+    </resultMap>
+	<!--根据类型获取导出财务报表所需数据  -->
+	<select id="getPurchDataByState" resultMap="purchDataByState">
+		SELECT
+			p.purchase_id,
+			p.order_source,
+			p.print_ticket_date,p.order_no,
+			p.passenger_names,p.pay_amount,
+			p.customer_amount,p.profit,
+			p.supplier,p.pay_way,p.real_pay,
+			p.employee_name,p.remark,
+			p.c_add_date,p.flight_date,
+			p.purchase_no,
+			p.trade_no,p.type,
+			p.new_ticket_no 
+		FROM
+			t_purchase p 
+		WHERE p.print_ticket_date BETWEEN #{startDate} AND #{endDate} AND p.flag!=1 AND p.type=#{state}
+			
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<select id="getPurchCountByOrderNo" resultType="int">
+		SELECT COUNT(1) FROM t_purchase WHERE flag!=1 AND order_no =#{orderNo}
+	</select>
+	
+	<select id="getB2BtciketCountByRemark" resultType="string">
+		SELECT passenger_names FROM t_purchase WHERE flag="0"  
+		AND c_add_date BETWEEN #{startDate} AND #{endDate}
+		AND remark LIKE #{remark}
+	</select>
+	
+</mapper>

@@ -1,0 +1,44 @@
+server:
+  port: 9110
+  max-http-header-size: 10240
+  servlet:
+    context-path: /erp
+spring:
+  application:
+    name: MF_ORDER_CONSUMER
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://14.152.95.93:3106/jeesite2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: azm2903
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    filters: wall,mergeStat
+    data-source-name: gunsdb
+  data:
+    mongodb:
+      host: 192.168.1.177
+      port: 27000
+      database: db4
+  redis:
+      host: 192.168.1.177
+      post: 6379
+      database: 3
+      timeout: 10s
+      jedis:
+        pool:
+          minIdle: 1
+          maxIdle: 10
+          maxWait: 10s
+          maxActive: 8
+
+#多数据源情况的配置
+guns:
+  muti-datasource:
+    open: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://163.142.122.35:3306/guns_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: root
+    data-source-name: otherdb

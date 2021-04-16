@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result status="ok">
+	<order id="1589785297000" orderNo="5222605261394" allPrice="1456.0"
+		noPay="0" source="distribution"
+		backnote="去程更改条件：航班起飞前168小时之前,改期手续费为70元;航班起飞前72小时之前,改期手续费为105元;航班起飞前4小时之前,改期手续费为140元;航班起飞前4小时之后,改期手续费为210元退票条件：航班起飞前168小时之前,退票手续费为140元;航班起飞前72小时之前,退票手续费为175元;航班起飞前4小时之前,退票手续费为210元;航班起飞前4小时之后,退票手续费为280元签转条件：不可签转"
+		xcdPrice="0" viewPrice="350.0" price="314.0" policyFid="MNY200511160746SDI409"
+		policyCode="007FZHH" cabinNote="007FZHHYZJ" policyPriceType="1"
+		insuranceUnitPrice="0" insuranceCount="0" pnr="" cpnr="" childPrice="0.0"
+		childFuelTax="0.0" infantPrice="0.0" constructionFee="50.0" fuelTax="0.0"
+		status="TICKET_OK" contact="张琬琦" contactMob="18151329921" createTime="2020-05-18 15:01:37"
+		needPS="false">
+		<flight code="ZH9406" cabin="L" dep="CTU" arr="SZX" depDay="2020-05-26"
+			depTime="17:30" arrTime="20:10" realCode="" />
+		<passenger name="张琬琦" birthday="1992-01-05" ageType="0"
+			gender="女" cardType="NI" price="314.0" cardNum="440306199201053545"
+			contactMob="18475459843" eticketNum="4792186895072"></passenger>
+		<passenger name="肖黎" birthday="1992-06-14" ageType="0"
+			gender="男" cardType="NI" price="314.0" cardNum="362426199206147332"
+			contactMob="18475459843" eticketNum="4792186895071"></passenger>
+		<passenger name="刘学熙" birthday="1990-08-19" ageType="0"
+			gender="男" cardType="NI" price="314.0" cardNum="362426199008197734"
+			contactMob="13823365769" eticketNum="4792186895069"></passenger>
+		<passenger name="罗小枋" birthday="1994-11-16" ageType="0"
+			gender="女" cardType="NI" price="314.0" cardNum="36242619941116772X"
+			contactMob="18475459843" eticketNum="4792186895070"></passenger>
+		<log operator="system" time="2020-05-18 15:01:38" action="订单实时舱位状态: A 操作人: system" />
+		<log operator="System" time="2020-05-18 15:01:39" action="生成订单 操作人: System" />
+		<log operator="system" time="2020-05-18 15:05:58" action="开始进行支付前校验 操作人: system" />
+		<log operator="system" time="2020-05-18 15:05:59" action="支付前校验结果:true 操作人: system" />
+		<log operator="System" time="2020-05-18 15:06:28" action="订单状态由订座成功等待支付变为支付成功等待出票 操作人: System" />
+		<log operator="王楠钧" time="2020-05-18 15:07:21" action="点开了订单处理页 操作人: 王楠钧" />
+		<log operator="王楠钧" time="2020-05-18 15:07:21" action="打开订单详情页 操作人: 王楠钧" />
+		<log operator="熊智峰" time="2020-05-18 15:08:56" action="打开订单详情页 操作人: 熊智峰" />
+		<log operator="王楠钧" time="2020-05-18 15:23:57"
+			action="操作员: 王楠钧,操作出票，票号：张琬琦:4792186895072;肖黎:4792186895071;刘学熙:4792186895069;罗小枋:4792186895070;操作结果：票号校验通过 操作人: 王楠钧" />
+		<log operator="System" time="2020-05-18 15:23:57" action="订单状态由支付成功等待出票变为出票完成 操作人: System" />
+		<log operator="王楠钧" time="2020-05-18 15:24:01" action="打开订单详情页 操作人: 王楠钧" />
+		<log operator="技术" time="2020-05-18 15:29:56" action="打开订单详情页 操作人: 技术" />
+	</order>
+</result>
